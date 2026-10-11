@@ -1,29 +1,26 @@
-import axios from 'axios';
+/* 1.0 Imports =======================================================================================================*/
+/* === 1.1 */
+import { Routes, Route } from 'react-router-dom';
 
-const api_key = '35ad69804a1549088a32b833826e09f4'
+/* === 1.2 Styles import =============================================================================================*/
+
+/* === 1.3 Components import =========================================================================================*/
+import Navigation from './components/nav/Navigation.jsx';
+import Home from './pages/home/Home.jsx';
+import Wishlist from './pages/wishlist/Wishlist.jsx';
+import Library from './pages/library/Library.jsx';
 
 
+/* 2.0 Function App ==================================================================================================*/
 function App() {
-    async function fetchGames () {
-        try {
-            const result = await axios.get('https://api.rawg.io/api/games', {
-                params: {
-                    key: api_key,
-
-                }
-            })
-            console.log(result);
-        } catch (e){
-            console.error(e);
-        }
-    }
-
     return (
         <>
-            <main>
-                <h1>Hello world!</h1>
-                <button type='button' onClick={() => fetchGames()}>Fetch All Games</button>
-            </main>
+            {<Navigation/>}
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/wishlist" element={<Wishlist/>}/>
+                <Route path="/library" element={<Library/>}/>
+            </Routes>
         </>
     )
 }
