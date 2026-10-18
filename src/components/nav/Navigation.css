@@ -1,0 +1,12 @@
+.nav_ul {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.nav_li {
+    list-style-type: none;
+}
+
+
+
