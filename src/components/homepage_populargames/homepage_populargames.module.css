@@ -1,0 +1,34 @@
+.popular-wrapper {
+    display: flex;
+    border: none;
+}
+
+.gamedetail-screenshot-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.image-wrapper {
+    flex-basis: 1000px;
+    flex-grow: 3;
+    flex-shrink: 0.1;
+}
+
+.screenshots-wrapper {
+    flex-basis: 400px;
+    flex-grow: 0;
+    flex-shrink: 2;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.screenshot {
+    width: 100%;
+    object-fit: fill;
+}
