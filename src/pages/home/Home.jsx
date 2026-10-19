@@ -2,6 +2,7 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
+import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
 
 import './Home.css';
 
@@ -65,15 +66,26 @@ function Home () {
                 <button type='button' onClick={() => console.log(gamesPopular)}>Games</button>
 
                 {/* Insert section Popular games */}
-                <section className="popular_games">
-                    {gamesPopular.length > 0 && (
-                        <div>
-                            <h1>Popular</h1>
-                            <p>{gamesPopular[0].name}</p>
-                        </div>
+                {gamesPopular.length > 0 && (
+                    <PopularGames
+                        key={gamesPopular[0].id}
+                        background_image={gamesPopular[0].background_image}
+                        name={gamesPopular[0].name}
+                        genre={gamesPopular[0].genres[0].name}
+                        rating={gamesPopular[0].rating}
+                        owned={gamesPopular[0].added_by_status.owned}
+                        playing={gamesPopular[0].added_by_status.playing}
+                        screenshot_one={gamesPopular[0].short_screenshots[1].image}
+                        screenshot_two={gamesPopular[0].short_screenshots[2].image}
+                    />
+                )}
 
-                    )}
-                </section>
+
+
+
+
+
+
 
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (

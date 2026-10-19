@@ -8,7 +8,7 @@ function GameTile ({background_image, name, genres, released}) {
                 <span className={styles['tile-image-wrapper']}>
                     <img src={background_image} alt='game image'/>
                 </span>
-                <h3 className={styles['tile-header']}>{name}</h3>
+                <h2 className={styles['tile-header']}>{name}</h2>
                 <div className={styles['tile-details']}>
                     <p>{genres}</p>
                     <p>{released}</p>
