@@ -1,0 +1,16 @@
+.tile-wrapper {
+    display: flex;
+    flex-grow: 0;
+    flex-basis: 300px;
+}
+
+.tile-button {
+    flex-basis: 300px;
+    flex-grow: 0;
+
+}
+
+.tile-image-wrapper img {
+    width: 100%;
+}
+

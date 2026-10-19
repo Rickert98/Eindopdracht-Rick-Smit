@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 
-import gameTile from '../../components/homepage_game_tile/home_page_game_tile.jsx'
+import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 
-
+import './Home.css';
 
 function Home () {
     /* Set States for storing game data */
@@ -59,12 +59,12 @@ function Home () {
 
     return (
         <>
-            <main>
+            <div className='inner-content-container'>
                 {/* Buttons for quick testing. Replace later with mounting cycle */}
                 {/*<button type='button' onClick={() => fetchGames()}>Fetch All Games</button>*/}
                 <button type='button' onClick={() => console.log(gamesPopular)}>Games</button>
 
-
+                {/* Insert section Popular games */}
                 <section className="popular_games">
                     {gamesPopular.length > 0 && (
                         <div>
@@ -75,18 +75,26 @@ function Home () {
                     )}
                 </section>
 
+                {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
-                    <div>
+                    <section className="recently-released-wrapper">
                         <h2>Recently released</h2>
-                        {gamesRecent.map((game) => {
-                            return(
-                                gameTile(game)
-                            )
-                        })}
-                    </div>
+                        <ul className="recently-released">
+                            {gamesRecent.map((game) => {
+                                return(
+                                    <GameTile
+                                        key={game.id}
+                                        background_image={game.background_image}
+                                        name={game.name}
+                                        genres={game.genres[0].name}
+                                        released={game.released}
+                                    />
+                                )
+                            })}
+                        </ul>
+                    </section>
                 )}
-
-            </main>
+            </div>
         </>
     )
 }

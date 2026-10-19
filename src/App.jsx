@@ -3,6 +3,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 /* === 1.2 Styles import =============================================================================================*/
+import './App.css';
 
 /* === 1.3 Components import =========================================================================================*/
 import Navigation from './components/nav/Navigation.jsx';
@@ -16,11 +17,13 @@ function App() {
     return (
         <>
             {<Navigation/>}
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/wishlist" element={<Wishlist/>}/>
-                <Route path="/library" element={<Library/>}/>
-            </Routes>
+            <main className='outer-content-container'>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/wishlist" element={<Wishlist/>}/>
+                    <Route path="/library" element={<Library/>}/>
+                </Routes>
+            </main>
         </>
     )
 }

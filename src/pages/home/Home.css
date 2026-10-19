@@ -1,0 +1,10 @@
+.recently-released {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-count: 4;
+    row-gap: 30px;
+
+    list-style-type: none;
+    padding-inline-start: 0;
+}

@@ -1,0 +1,16 @@
+.outer-content-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+
+    background-color: var(--color-primary);
+}
+
+.inner-content-container {
+    flex-basis: 1400px;
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    margin: 0 30px;
+}
