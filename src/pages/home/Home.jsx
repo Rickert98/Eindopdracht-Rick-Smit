@@ -9,6 +9,7 @@ import './Home.css';
 function Home () {
     /* Set States for storing game data */
     const [gamesPopular, setGamesPopular] = useState([]);
+    const [popularCount, setPopularCount] = useState(0);
     const [gamesRecent, setGamesRecent] = useState([]);
     /* Set States for possible errors */
 
@@ -22,18 +23,19 @@ function Home () {
                 const result = await axios.get('https://api.rawg.io/api/games', {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
-                        page_size: 40,
+                        page_size: 6,
                         ordering: '-added',
                     },
                 })
                 setGamesPopular (result.data.results)
+                /* Run the handleCount function once so the slider is showing the correct game */
+                handleCount(0)
                 console.log(result);
 
             } catch (e){
                 console.error(e);
             }
         }
-
         /* Fetch recent games */
         async function fetchRecentGames () {
             try {
@@ -52,33 +54,57 @@ function Home () {
                 console.error(e);
             }
         }
-
         fetchPopularGames();
         fetchRecentGames();
     }, []);
 
+    /* State popularCount cant be higher than the number of popular games in stored in the state gamesPopular.
+    * Cant be lower than 0 */
+
+    function handleCount (number) {
+        if (number === gamesPopular.length) {
+            setPopularCount(0);
+            number = 0;
+        } else {
+            if (number < 0) {
+                setPopularCount(gamesPopular.length - 1)
+                number = gamesPopular.length - 1;
+            } else {
+                setPopularCount(number)
+            }
+        }
+        let radiobtn = document.getElementById(`btn-radio${number}`);
+        radiobtn.checked = true;
+    }
+
     return (
         <>
             <div className='inner-content-container'>
-                {/* Buttons for quick testing. Replace later with mounting cycle */}
-                {/*<button type='button' onClick={() => fetchGames()}>Fetch All Games</button>*/}
-                <button type='button' onClick={() => console.log(gamesPopular)}>Games</button>
-
                 {/* Insert section Popular games */}
                 {gamesPopular.length > 0 && (
-                    <PopularGames
-                        key={gamesPopular[0].id}
-                        background_image={gamesPopular[0].background_image}
-                        name={gamesPopular[0].name}
-                        genre={gamesPopular[0].genres[0].name}
-                        rating={gamesPopular[0].rating}
-                        owned={gamesPopular[0].added_by_status.owned}
-                        playing={gamesPopular[0].added_by_status.playing}
-                        screenshot_one={gamesPopular[0].short_screenshots[1].image}
-                        screenshot_two={gamesPopular[0].short_screenshots[2].image}
-                    />
+                    <section>
+                        <PopularGames
+                            key={gamesPopular[popularCount].id}
+                            background_image={gamesPopular[popularCount].background_image}
+                            name={gamesPopular[popularCount].name}
+                            genre={gamesPopular[popularCount].genres[0].name}
+                            rating={gamesPopular[popularCount].rating}
+                            owned={gamesPopular[popularCount].added_by_status.owned}
+                            playing={gamesPopular[popularCount].added_by_status.playing}
+                            screenshot_one={gamesPopular[popularCount].short_screenshots[1].image}
+                            screenshot_two={gamesPopular[popularCount].short_screenshots[2].image}
+                        />
+                        <span className="popular-slider">
+                            <button onClick={(() => {handleCount(popularCount-1)})} className='slider-previous'></button>
+                            {gamesPopular.map((game, index) => {
+                                return (
+                                    <input key={`popular-${game.id}`} type='radio' name='radio-button' id={`btn-radio${index}`} onClick={(() => {setPopularCount(index)})} className='slider-button'/>
+                                )
+                            })}
+                            <button onClick={(() => {handleCount(popularCount+1)})} className='slider-next'></button>
+                        </span>
+                    </section>
                 )}
-
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
                     <section className="recently-released">
