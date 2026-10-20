@@ -1,6 +1,29 @@
+.popular-games {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .popular-wrapper {
     display: flex;
     border: none;
+}
+
+.game-title {
+    border: none;
+    background: none;
+    text-align: start;
+}
+
+.rating-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-buttons {
+    border: none;
+    background: none;
 }
 
 .gamedetail-screenshot-wrapper {
@@ -8,12 +31,14 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 5px;
+    background-color: var(--color-tertiary);
 }
 
 .image-wrapper {
     flex-basis: 1000px;
     flex-grow: 3;
     flex-shrink: 0.1;
+    border: none;
 }
 
 .screenshots-wrapper {

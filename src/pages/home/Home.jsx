@@ -14,7 +14,6 @@ function Home () {
 
 
     /* Upon refresh fetch games from RAWG api */
-    /* maximum page size is 40 */
     useEffect (() => {
         /* Fetch popular games */
         async function fetchPopularGames () {
@@ -80,18 +79,11 @@ function Home () {
                     />
                 )}
 
-
-
-
-
-
-
-
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
-                    <section className="recently-released-wrapper">
+                    <section className="recently-released">
                         <h2>Recently released</h2>
-                        <ul className="recently-released">
+                        <ul className="recently-released-wrapper">
                             {gamesRecent.map((game) => {
                                 return(
                                     <GameTile
