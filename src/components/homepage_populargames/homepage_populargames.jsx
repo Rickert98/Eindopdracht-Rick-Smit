@@ -32,10 +32,10 @@ function PopularGames ({background_image, name, genre, rating, owned, playing, s
                             </button>
                         </div>
                     </div>
-                    <div className={styles['screenshots-wrapper']}>
+                    <span className={styles['screenshots-wrapper']}>
                         <img src={screenshot_one} className={styles['screenshot']} alt="game screenshot"/>
                         <img src={screenshot_two} className={styles['screenshot']} alt="game screenshot"/>
-                    </div>
+                    </span>
                 </div>
             </article>
         </section>

@@ -16,4 +16,49 @@
     padding-inline-start: 0;
 }
 
+.popular-slider {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin: 10px;
+}
+
+.slider-next {
+    width: 0;
+    height: 0;
+    background: none;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 30px solid black;
+    border-right: 0 solid transparent;
+    cursor: pointer;
+}
+
+.slider-previous {
+    width: 0;
+    height: 0;
+    background: none;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 30px solid black;
+    border-left: 0 solid transparent;
+    cursor: pointer;
+}
+
+.slider-button {
+    appearance: none;
+    border-radius: 0;
+    width: 20px;
+    height: 10px;
+    background-color: grey;
+
+    cursor: pointer;
+}
+
+.slider-button:checked {
+    background-color: var(--color-quaternary);
+}
+
+
+
 
