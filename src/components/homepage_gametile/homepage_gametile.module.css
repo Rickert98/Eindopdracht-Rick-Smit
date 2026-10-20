@@ -1,22 +1,27 @@
 .tile-wrapper {
     flex-grow: 0;
     flex-basis: 300px;
-}
-
-.tile-button {
-    display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
+    background-color: var(--color-tertiary);
 }
 
-.tile-image-wrapper {
+.tile-button {
     width: 300px;
-    height: 150px;
+    height: 200px;
     display: flex;
+    flex-direction: column;
+    background: none;
+    border: none;
 }
 
-.tile-image-wrapper img {
+.add-buttons {
+    border: none;
+    background: none;
+}
+
+.tile-button img {
     width: 100%;
     height: 100%;
     object-fit: fill;
@@ -30,6 +35,7 @@
 .tile-details {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding:0 5px;
 }
 

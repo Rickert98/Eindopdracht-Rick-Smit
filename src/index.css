@@ -11,3 +11,7 @@
     --color-secondary: #212529;
     --color-tertiary: #D9D9D9;
 }
+
+button :hover {
+    cursor: pointer;
+}
