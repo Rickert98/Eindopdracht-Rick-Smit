@@ -82,7 +82,7 @@ function Home () {
             <div className='inner-content-container'>
                 {/* Insert section Popular games */}
                 {gamesPopular.length > 0 && (
-                    <section>
+                    <>
                         <PopularGames
                             key={gamesPopular[popularCount].id}
                             background_image={gamesPopular[popularCount].background_image}
@@ -103,7 +103,7 @@ function Home () {
                             })}
                             <button onClick={(() => {handleCount(popularCount+1)})} className='slider-next'></button>
                         </span>
-                    </section>
+                    </>
                 )}
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
