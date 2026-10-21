@@ -10,6 +10,7 @@ import Navigation from './components/nav/Navigation.jsx';
 import Home from './pages/home/Home.jsx';
 import Wishlist from './pages/wishlist/Wishlist.jsx';
 import Library from './pages/library/Library.jsx';
+import Login from './pages/login/Login.jsx'
 
 
 /* 2.0 Function App ==================================================================================================*/
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/wishlist" element={<Wishlist/>}/>
                     <Route path="/library" element={<Library/>}/>
+                    <Route path="/login" element={<Login/>}/>
                 </Routes>
             </main>
         </>

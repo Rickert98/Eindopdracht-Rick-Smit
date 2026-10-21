@@ -20,6 +20,9 @@ function Navigation() {
                 <li className="nav_li">
                     <NavLink to="/library">Library</NavLink>
                 </li>
+                <li className="nav_li">
+                    <NavLink to="/login">Login</NavLink>
+                </li>
             </ul>
         </nav>
     )
