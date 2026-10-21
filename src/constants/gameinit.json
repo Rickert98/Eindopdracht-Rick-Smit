@@ -1,0 +1,165 @@
+{
+  "collections": [
+    {
+      "name": "userProfile",
+      "fields": [
+        {
+          "name": "userId",
+          "type": "reference:userId",
+          "required": true
+        },
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "min": 1,
+          "max": 20
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user"
+        ],
+        "POST": [
+          "user"
+        ],
+        "PUT": [
+          "user"
+        ]
+      },
+      "name": "userLibrary",
+      "fields": [
+        {
+          "name": "userId",
+          "type": "reference:userId",
+          "required": true
+        },
+        {
+          "name": "gameId",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user"
+        ],
+        "POST": [
+          "user"
+        ],
+        "DELETE": [
+          "user"
+        ]
+      },
+      "name": "userWishlist",
+      "field": [
+        {
+          "name": "userId",
+          "type": "reference:userId",
+          "required": true
+        },
+        {
+          "name": "gameId",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user"
+        ],
+        "POST": [
+          "user"
+        ],
+        "DELETE": [
+          "user"
+        ]
+      }
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "email": "user@voorbeeld.nl",
+      "password": "user123",
+      "roles": [
+        "user"
+      ]
+    }
+
+  ],
+  "data": {
+    "userProfile": [
+      {
+        "userId": 1,
+        "username": "Karel"
+      },
+      {
+        "userId": 2,
+        "username": "Jan"
+      }
+    ],
+    "userLibrary": [
+      {
+        "userId": 1,
+        "gameId": 566457
+      },
+      {
+        "userId": 1,
+        "gameId": 62424
+      },
+      {
+        "userId": 1,
+        "gameId": 324997
+      },
+      {
+        "userId": 1,
+        "gameId": 42857
+      },
+      {
+        "userId": 2,
+        "gameId": 438620
+      },
+      {
+        "userId": 2,
+        "gameId": 513033
+      },
+      {
+        "userId": 2,
+        "gameId": 362880
+      }
+    ],
+    "userWishlist": [
+      {
+        "userId": 1,
+        "gameId": 362880
+      },
+      {
+        "userId": 1,
+        "gameId": 513033
+      },
+      {
+        "userId": 2,
+        "gameId": 566457
+      },
+      {
+        "userId": 2,
+        "gameId": 257242
+      },
+      {
+        "userId": 2,
+        "gameId": 58779
+      },
+      {
+        "userId": 2,
+        "gameId": 427490
+      },
+      {
+        "userId": 2,
+        "gameId": 324997
+      }
+    ]
+  }
+}
+
+
