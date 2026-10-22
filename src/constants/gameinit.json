@@ -5,7 +5,7 @@
       "fields": [
         {
           "name": "userId",
-          "type": "reference:userId",
+          "type": "reference:user",
           "required": true
         },
         {
@@ -14,6 +14,11 @@
           "required": true,
           "min": 1,
           "max": 20
+        },
+        {
+          "name": "newsletter",
+          "type": "boolean",
+          "required": true
         }
       ],
       "permissions": {
@@ -24,54 +29,6 @@
           "user"
         ],
         "PUT": [
-          "user"
-        ]
-      },
-      "name": "userLibrary",
-      "fields": [
-        {
-          "name": "userId",
-          "type": "reference:userId",
-          "required": true
-        },
-        {
-          "name": "gameId",
-          "type": "string",
-          "required": true
-        }
-      ],
-      "permissions": {
-        "GET": [
-          "user"
-        ],
-        "POST": [
-          "user"
-        ],
-        "DELETE": [
-          "user"
-        ]
-      },
-      "name": "userWishlist",
-      "field": [
-        {
-          "name": "userId",
-          "type": "reference:userId",
-          "required": true
-        },
-        {
-          "name": "gameId",
-          "type": "string",
-          "required": true
-        }
-      ],
-      "permissions": {
-        "GET": [
-          "user"
-        ],
-        "POST": [
-          "user"
-        ],
-        "DELETE": [
           "user"
         ]
       }

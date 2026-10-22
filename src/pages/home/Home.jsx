@@ -29,7 +29,7 @@ function Home () {
                 })
                 setGamesPopular (result.data.results)
                 /* Run the handleCount function once so the slider is showing the correct game */
-                handleCount(0)
+                /*handleCount(0)*/
                 console.log(result);
 
             } catch (e){
@@ -98,7 +98,14 @@ function Home () {
                             <button onClick={(() => {handleCount(popularCount-1)})} className='slider-previous'></button>
                             {gamesPopular.map((game, index) => {
                                 return (
-                                    <input key={`popular-${game.id}`} type='radio' name='radio-button' id={`btn-radio${index}`} onClick={(() => {setPopularCount(index)})} className='slider-button'/>
+                                    <input
+                                        key={`popular-${game.id}`}
+                                        type='radio'
+                                        name='radio-button'
+                                        id={`btn-radio${index}`}
+                                        checked={popularCount === index}
+                                        onChange={(() => {setPopularCount(index)})}
+                                        className='slider-button'/>
                                 )
                             })}
                             <button onClick={(() => {handleCount(popularCount+1)})} className='slider-next'></button>
