@@ -125,6 +125,7 @@ function Home () {
                                         name={game.name}
                                         genres={game.genres[0].name}
                                         released={game.released}
+                                        id={game.id}
                                     />
                                 )
                             })}

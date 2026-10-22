@@ -12,6 +12,7 @@ import Wishlist from './pages/wishlist/Wishlist.jsx';
 import Library from './pages/library/Library.jsx';
 import Login from './pages/login/Login.jsx'
 import Register from './pages/register/Register.jsx'
+import GameDetail from './pages/game_detail/Game_detail.jsx'
 
 
 /* 2.0 Function App ==================================================================================================*/
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/library" element={<Library/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route path="game/:id" element={<GameDetail/>}/>
                 </Routes>
             </main>
         </>
