@@ -1,3 +1,6 @@
+/* IN THE ONCHANGE FUNCTION THE CHECKBOX NEEDS TO PASS A BOOLEAN OR OTHERWISE THE API DOESNT WORK PROPERLY */
+
+
 import {useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
@@ -8,15 +11,19 @@ function Register () {
     const [formState, setFormState] = useState({
         email: '',
         password: '',
+        username: '',
+        newsletter: false,
+
     });
     const [error, toggleError] = useState(false);
 
     function handleChange(e) {
         const changedFieldName = e.target.name;
+        const newValue = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
         setFormState({
             ...formState,
-            [changedFieldName]: e.target.value,
+            [changedFieldName]: newValue,
         })
     }
 
@@ -27,7 +34,7 @@ function Register () {
 
         /* Register new user with only the email and the password to the api/users endpoint, according to the api rules */
         try {
-            const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/users`,
+            const createUser = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/users`,
                 {
                     "email": `${formState.email}`,
                     "password": `${formState.password}`,
@@ -42,9 +49,26 @@ function Register () {
                         'accept': '*/*',
                     }
                 })
-            console.log(response);
-            /* When succesfully registered. direct user to login page */
-            navigate('/login')
+            console.log("New user succesfully created in NOVI api");
+            console.log(createUser.data.id);
+
+            const createUserProfile = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userProfile`, {
+                'id': createUser.data.id,
+                "username": `${formState.username}`,
+                "newsletter": formState.newsletter,
+            },
+                {
+                    headers: {
+                        'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                        'Content-Type': 'application/json',
+                        'accept': '*/*',
+                    }
+                })
+            console.log("User profile succesfully updated");
+            console.log(createUserProfile);
+
+            /* When new user succesfully registered.  Direct user to login page */
+            navigate('/login');
 
         } catch(e) {
             console.error(e);
@@ -72,6 +96,26 @@ function Register () {
                             type='text'
                             name="password"
                             value={formState.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label className="login-register-label">
+                        Gebruikersnaam:
+                        <input
+                            type='text'
+                            name="username"
+                            value={formState.username}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label className="login-register-label">
+                        Ik wil graag de nieuwsbrief ontvangen.
+                        <input
+                            type='checkbox'
+                            name="newsletter"
+                            value={formState.newsletter}
                             onChange={handleChange}
                             required
                         />

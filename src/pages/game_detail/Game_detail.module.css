@@ -1,0 +1,33 @@
+.detail_page {
+    display: flex;
+    flex-direction: column;
+}
+
+.details_screenshots_wrapper {
+    display: flex;
+}
+
+.details_wrapper {
+    display: flex;
+}
+
+.screenshots, .detail_header {
+    display: flex;
+    flex-wrap: wrap;          /* Wrap to next line on smaller screens */
+    justify-content: center;   /* Center images horizontally */
+    gap: 16px;                /* Space between screenshot items */
+    width: 100%;
+    max-width: 1400px;        /* Capped at 1400px */
+    margin: 0 auto;           /* Centers the container on wide screens */
+    padding: 16px;
+    flex-grow: 0;
+}
+
+.screenshot, .header_background {
+    flex: 1 1 calc(25% - 16px);
+    min-width: 250px;         /* Forces wrapping on small mobile screens */
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}

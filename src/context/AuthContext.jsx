@@ -35,6 +35,7 @@ function AuthContextProvider ({children}) {
 
         void fetchUserData(decoded.userId, JWT)
         console.log("gebruiker is ingelogd")
+        console.log(JWT);
     }
 
     function logout() {

@@ -6,9 +6,6 @@ import addWishlistButton from '../../assets/heart-line.png'
 
 import {useNavigate} from 'react-router-dom';
 
-
-
-
 function GameTile ({background_image, name, genres, released, id}) {
     const navigate = useNavigate();
     return (

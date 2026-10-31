@@ -1,67 +1,119 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
 
+import { AuthContext } from '../../context/AuthContext.jsx';
+
+
 import './Home.css';
 
 function Home () {
+
+    /* get the user ID and email from the context */
+    const { user } = useContext(AuthContext);
+
     /* Set States for storing game data */
     const [gamesPopular, setGamesPopular] = useState([]);
     const [popularCount, setPopularCount] = useState(0);
     const [gamesRecent, setGamesRecent] = useState([]);
-    /* Set States for possible errors */
+    const [userLibrary, setUserLibrary] = useState([]);
+    const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
+
+    /* ============================================================================= Set States for possible errors */
+
+    const token = localStorage.getItem('token');
 
 
-    /* Upon refresh fetch games from RAWG api */
+    async function putUserLibrary(gameId) {
+        console.log(token)
+        const { user } = useContext(AuthContext);
+
+        try {
+            const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
+                "userId": user.id,
+                "gameId": gameId,
+            }, {
+                headers: {
+                    'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'accept': '*/*',
+                }
+            });
+            console.log("library succesvol gepost")
+            console.log(response);
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
+
+
     useEffect (() => {
-        /* Fetch popular games */
-        async function fetchPopularGames () {
+        /* Upon refresh fetch games from RAWG api and fetch userLibrary */
+        async function fetchGames () {
+            console.log(user);
 
             try {
-                const result = await axios.get('https://api.rawg.io/api/games', {
+                /* Fetch popular games from RAWG */
+                const popularGames = await axios.get('https://api.rawg.io/api/games', {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 6,
                         ordering: '-added',
                     },
-                })
-                setGamesPopular (result.data.results)
-                /* Run the handleCount function once so the slider is showing the correct game */
-                /*handleCount(0)*/
-                console.log(result);
+                });
+                setGamesPopular (popularGames.data.results)
+                console.log(popularGames);
 
-            } catch (e){
-                console.error(e);
-            }
-        }
-        /* Fetch recent games */
-        async function fetchRecentGames () {
-            try {
-                const result = await axios.get('https://api.rawg.io/api/games', {
+                /* Fetch recent games from RAWG */
+                const recentGames = await axios.get('https://api.rawg.io/api/games', {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 20,
                         ordering: '-released',
                         metacritic: '40, 100',
                     },
-                })
-                setGamesRecent (result.data.results)
-                console.log(result);
-
+                });
+                setGamesRecent (recentGames.data.results)
+                console.log(recentGames);
             } catch (e){
                 console.error(e);
             }
         }
-        fetchPopularGames();
-        fetchRecentGames();
+        fetchGames();
+
+        fetchUserLibrary();
     }, []);
 
-    /* State popularCount cant be higher than the number of popular games in stored in the state gamesPopular.
-    * Cant be lower than 0 */
+
+    async function fetchUserLibrary() {
+        if (user !== null) {
+            try {
+                const library = await axios.get(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`, {
+                    params: {
+                        userId: user.id
+                    },
+                    headers: {
+                        'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                        'Content-Type': 'application/json',
+                        'accept': '*/*',
+                    }
+                });
+                setUserLibrary(library);
+                console.log(`De userlibrary bestaat uit: `);
+                console.log(library)
+            } catch(e) {
+                console.error(e);
+            }
+        }
+    }
 
     function handleCount (number) {
+        /* State popularCount cant be higher than the number of popular games in stored in the state gamesPopular.
+        * Cant be lower than 0 */
         if (number === gamesPopular.length) {
             setPopularCount(0);
             number = 0;
@@ -94,6 +146,8 @@ function Home () {
                             screenshot_one={gamesPopular[popularCount].short_screenshots[1].image}
                             screenshot_two={gamesPopular[popularCount].short_screenshots[2].image}
                         />
+
+                        {/* Slider for the popular games */}
                         <span className="popular-slider">
                             <button onClick={(() => {handleCount(popularCount-1)})} className='slider-previous'></button>
                             {gamesPopular.map((game, index) => {

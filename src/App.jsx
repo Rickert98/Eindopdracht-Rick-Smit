@@ -10,9 +10,12 @@ import Navigation from './components/nav/Navigation.jsx';
 import Home from './pages/home/Home.jsx';
 import Wishlist from './pages/wishlist/Wishlist.jsx';
 import Library from './pages/library/Library.jsx';
-import Login from './pages/login/Login.jsx'
-import Register from './pages/register/Register.jsx'
-import GameDetail from './pages/game_detail/Game_detail.jsx'
+import Login from './pages/login/Login.jsx';
+import Register from './pages/register/Register.jsx';
+import GameDetail from './pages/game_detail/Game_detail.jsx';
+
+
+
 
 
 /* 2.0 Function App ==================================================================================================*/

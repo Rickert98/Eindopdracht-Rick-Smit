@@ -4,9 +4,6 @@ import React, {useContext} from 'react';
 import {NavLink } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
-
-
-
 /* === 1.2 Styles import =============================================================================================*/
 import './Navigation.css';
 
@@ -29,7 +26,7 @@ function Navigation() {
 
 
                 {isAuth ?
-                    <button type="button" onClick={logout}>Log uit</button>
+                    <button type="button" onClick={(() =>{logout()})}>Log uit</button>
                     :
                     <>
                         <li className="nav_li">
