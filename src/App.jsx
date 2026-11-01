@@ -3,12 +3,19 @@
 import { Routes, Route } from 'react-router-dom';
 
 /* === 1.2 Styles import =============================================================================================*/
+import './App.css';
 
 /* === 1.3 Components import =========================================================================================*/
 import Navigation from './components/nav/Navigation.jsx';
 import Home from './pages/home/Home.jsx';
 import Wishlist from './pages/wishlist/Wishlist.jsx';
 import Library from './pages/library/Library.jsx';
+import Login from './pages/login/Login.jsx';
+import Register from './pages/register/Register.jsx';
+import GameDetail from './pages/game_detail/Game_detail.jsx';
+
+
+
 
 
 /* 2.0 Function App ==================================================================================================*/
@@ -16,11 +23,16 @@ function App() {
     return (
         <>
             {<Navigation/>}
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/wishlist" element={<Wishlist/>}/>
-                <Route path="/library" element={<Library/>}/>
-            </Routes>
+            <main className='outer-content-container'>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/wishlist" element={<Wishlist/>}/>
+                    <Route path="/library" element={<Library/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="game/:id" element={<GameDetail/>}/>
+                </Routes>
+            </main>
         </>
     )
 }

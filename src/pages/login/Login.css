@@ -1,0 +1,42 @@
+.login-register-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+    width: 400px;
+    margin: 30px;
+}
+
+.radiobuttons-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.login-register-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.login-register-label {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.login-register-radiobutton input {
+    appearance: none;
+}
+
+.login-register-radiobutton {
+    cursor: pointer;
+    background-color: var(--color-quaternary);
+    color: var(--color-tertiary);
+    padding: 5px;
+    width: 100%;
+    margin: 1px;
+    text-align: center;
+}
+
+

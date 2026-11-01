@@ -1,0 +1,132 @@
+{
+  "collections": [
+    {
+      "name": "userProfile",
+      "fields": [
+        {
+          "name": "id",
+          "type": "reference:users",
+          "required": true
+        },
+        {
+          "name": "username",
+          "type": "string",
+          "required": true,
+          "min": 1,
+          "max": 20
+        },
+        {
+          "name": "newsletter",
+          "type": "boolean",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "anonymous"
+
+        ],
+        "POST": [
+          "user",
+          "admin",
+          "anonymous"
+        ],
+        "PUT": [
+          "user",
+          "admin",
+          "anonymous"
+        ]
+      }
+    },
+    {
+      "name": "userLibrary",
+      "fields": [
+        {
+          "name": "userId",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "gameId",
+          "type": "number",
+          "required": true
+        }
+      ],
+      "permissions": {
+        "GET": [
+          "user",
+          "admin",
+          "anonymous"
+        ],
+        "POST": [
+          "user",
+          "admin",
+          "anonymous"
+        ],
+        "PUT": [
+          "user",
+          "admin",
+          "anonymous"
+        ],
+        "DELETE": [
+          "user",
+          "admin",
+          "anonymous"
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "user@voorbeeld.nl",
+      "password": "user123",
+      "roles": [
+        "user"
+      ]
+    },
+    {
+      "id": 2,
+      "email": "user2@voorbeeld.nl",
+      "password": "user1234",
+      "roles": [
+        "user"
+      ]
+    }
+  ],
+  "data": {
+    "userProfile": [
+      {
+        "id": 1,
+        "username": "Karel",
+        "newsletter": true
+      },
+      {
+        "id": 2,
+        "username": "Jan",
+        "newsletter": false
+      }
+    ],
+    "userLibrary": [
+      {
+        "id": 1,
+        "gameId": [
+          566457,
+          62424,
+          324997,
+          42857
+        ]
+      },
+      {
+        "id": 2,
+        "gameId": [
+          438620,
+          513033,
+          362880
+        ]
+      }
+    ]
+  }
+}
