@@ -1,9 +1,4 @@
 .detail {
     display: flex;
     flex-direction: column;
-
-}
-
-.detail_header, .detail_content {
-
 }

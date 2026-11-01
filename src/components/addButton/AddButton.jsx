@@ -1,7 +1,11 @@
+import {useState} from 'react';
+
+import styles from './AddButton.module.css';
+
 import addLibraryButton from '../../assets/add-box-line.png'
 import addedLibraryButton from '../../assets/add-box-fill.png'
 
-import {useState} from 'react';
+
 
 function AddButton ({idGame, library, addGame, deleteGame}) {
     const id = `add-button-${idGame}`;
@@ -25,10 +29,9 @@ function AddButton ({idGame, library, addGame, deleteGame}) {
             console.log(isOwned)
         }
     }
-
     return (
-        <label>
-            <input type="checkbox" id={id} onClick={(() => {handleChange(id)}) }/>
+        <label className={styles['Addbutton-label']}>
+            <input type="checkbox" id={id} className={styles['Addbutton-input']} onClick={(() => {handleChange(id)})}/>
             <img
                 src={isOwned === true ? addedLibraryButton : addLibraryButton}
                 alt="add to library button"

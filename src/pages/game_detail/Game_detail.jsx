@@ -1,9 +1,11 @@
 import axios from 'axios';
 import {useContext, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
+import parse from 'html-react-parser';
 
 import Specs from '../../components/detailPageSpecs/detailPageSpecs.jsx';
 import SpecLister from '../../helpers/SpecLister.js';
+import UserReviewScore from '../../helpers/UserReviewScore.js';
 import AddButton from '../../components/addButton/AddButton.jsx';
 
 import fetchUserLibrary from '../../helpers/fetchUserLibrary.js';
@@ -17,8 +19,10 @@ function GameDetail () {
     const [gameDetails, setGameDetails] = useState([]);
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
-    const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
-    const [deleteGameLibrary, setDeleteGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
+    /* State for posting a game to the users library in NOV api */
+    const [addGameLibrary, setAddGameLibrary] = useState(0);
+    /* State for posting a game to the users library in NOV api */
+    const [deleteGameLibrary, setDeleteGameLibrary] = useState(0);
 
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
@@ -124,86 +128,105 @@ function GameDetail () {
     },[deleteGameLibrary])
 
     return (
-        <div className='inner-content-container detail_page'>
-            <header className="detail_header">
-                <img className={styles['header_background']} src={gameDetails.background_image} alt='background image'/>
-                <h1>{gameDetails.name}</h1>
-            </header>
-            <section className={styles['details_screenshots_wrapper']}>
-                {gameDetails &&
-                    <>
-                        <section>
-                            <Specs
-                                title="About"
-                                contents={gameDetails.description}
+        <>
+            {gameDetails &&
+                <div className='inner-content-container detail_page'>
+                    <header className={styles["header"]}>
+                        <img className={styles['header_background']} src={gameDetails.background_image} alt='background image'/>
+                        <h1>{gameDetails.name}</h1>
+                        <article className={styles['header_content_wrapper']}>
+                            {gameDetails.ratings &&
+                                <div className={styles['header-ratings']}>
+                                    <a href={gameDetails.metacritic_url} target="_blank">Metacritic rates this {gameDetails.metacritic}</a>
+                                    <p>The players rates this {UserReviewScore(gameDetails.ratings)}</p>
+                                </div>
+                            }
+                            <AddButton
+                                idGame={gameDetails.id}
+                                library={userLibrary}
+                                addGame={setAddGameLibrary}
+                                deleteGame={setDeleteGameLibrary}
                             />
-                            <div>
-                                <article className={styles['details_wrapper']}>
-
-                                        {gameDetails.platforms &&
-                                            <Specs className={styles['detail']}
-                                                   title="Platforms"
-                                                   contents={SpecLister(gameDetails.platforms.map((result)=>{
-                                                       return (
-                                                           result.platform
-                                                       )
-                                                   }))}
-                                            />
-                                        }
-                                        <Specs className={styles['detail']}
-                                               title="Release date"
-                                               contents={gameDetails.released}
-                                        />
+                            {
+                                gameDetails.publishers &&
+                                <p>Published by {gameDetails.publishers[0].name}</p>
+                            }
+                        </article>
+                    </header>
+                    <section className={styles['maincontent']}>
+                        {gameDetails &&
+                            <>
+                                <div className={styles['details_wrapper']}>
                                     <Specs
-                                        title="Tags"
-                                        contents={SpecLister(gameDetails.tags)}
+                                        title="About"
+                                        contents={parse(gameDetails.description || '')}
                                     />
+                                    <div className={styles['details-div']}>
+                                        <article className={styles['details-article']}>
 
-                                    {/* Platform data is in another array. Map methode is used here to create an array that works with SpecLister*/}
+                                            {gameDetails.platforms &&
+                                                <Specs className={styles['detail']}
+                                                       title="Platforms"
+                                                       contents={SpecLister(gameDetails.platforms.map((result)=>{
+                                                           return (
+                                                               result.platform
+                                                           )
+                                                       }))}
+                                                />
+                                            }
+                                            <Specs className={styles['detail']}
+                                                   title="Release date"
+                                                   contents={gameDetails.released}
+                                            />
+                                            <Specs
+                                                title="Tags"
+                                                contents={SpecLister(gameDetails.tags)}
+                                            />
 
-                                </article>
-                                <article>
-                                    <Specs className={styles['detail']}
-                                        title="Genre"
-                                        contents={SpecLister(gameDetails.genres)}
-                                    />
-                                    {
-                                        gameDetails.esrb_rating &&
-                                        <Specs className={styles['detail']}
-                                            title="Age rating"
-                                            contents={gameDetails.esrb_rating.name}
-                                        />
-                                    }
-                                </article>
+                                            {/* Platform data is in another array. Map methode is used here to create an array that works with SpecLister*/}
 
-                                    <AddButton
-                                        idGame={gameDetails.id}
-                                        library={userLibrary}
-                                        addGame={setAddGameLibrary}
-                                        deleteGame={setDeleteGameLibrary}
-                                    />
+                                        </article>
+                                        <article className={styles['details-article']}>
+                                            <Specs className={styles['detail']}
+                                                   title="Genre"
+                                                   contents={SpecLister(gameDetails.genres)}
+                                            />
+                                            {
+                                                gameDetails.esrb_rating &&
+                                                <Specs className={styles['detail']}
+                                                       title="Age rating"
+                                                       contents={gameDetails.esrb_rating.name}
+                                                />
+                                            }
+                                        </article>
 
 
-                            </div>
-                        </section>
-                        {gameScreenshots &&
-                            <section className={styles['screenshots']}>
-                                {/* Get a maximum of 4 screenshots shown on the */}
-                                {gameScreenshots.map((screenshot, index) => {
-                                    if (index < 4) {
-                                        return (
-                                            <img key={screenshot.id} src={screenshot.image} alt="screenshot" className={styles['screenshot']}/>
-                                        )
-                                    }
-                                })}
-                            </section>
+
+
+                                    </div>
+                                </div>
+                                {gameScreenshots &&
+                                    <section className={styles['screenshots']}>
+                                        {/* Get a maximum of 4 screenshots shown on the */}
+                                        {gameScreenshots.map((screenshot, index) => {
+                                            if (index < 4) {
+                                                return (
+                                                    <img key={screenshot.id} src={screenshot.image} alt="screenshot" className={styles['screenshot']}/>
+                                                )
+                                            }
+                                        })}
+                                    </section>
+                                }
+                            </>
                         }
-                    </>
-                }
-                {loading && <p>Loading...</p>}
-                {error && <p>Er ging iets mis met het ophalen van de data...</p>}
-            </section>
-        </div>
+                        {loading && <p>Loading...</p>}
+                        {error && <p>Er ging iets mis met het ophalen van de data...</p>}
+                    </section>
+                </div>
+            }
+        </>
+
+
     )
 }
 
