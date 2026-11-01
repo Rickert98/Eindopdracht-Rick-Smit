@@ -142,6 +142,7 @@ function GameDetail () {
                                 </div>
                             }
                             <AddButton
+                                label={true}
                                 idGame={gameDetails.id}
                                 library={userLibrary}
                                 addGame={setAddGameLibrary}
@@ -149,7 +150,7 @@ function GameDetail () {
                             />
                             {
                                 gameDetails.publishers &&
-                                <p>Published by {gameDetails.publishers[0].name}</p>
+                                <div className={styles["header-publisher"]}>Published by {gameDetails.publishers[0].name}</div>
                             }
                         </article>
                     </header>
