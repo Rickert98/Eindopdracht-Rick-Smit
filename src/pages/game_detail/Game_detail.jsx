@@ -19,8 +19,12 @@ function GameDetail () {
     const [gameDetails, setGameDetails] = useState([]);
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
-    /* State for posting a game to the users library in NOV api */
-    const [addGameLibrary, setAddGameLibrary] = useState(0);
+    /* State for posting a game to the users library in NOVI api */
+    const [addGameLibrary, setAddGameLibrary] = useState({
+        gameId: 0,
+        title: '',
+        genres: ''
+    });
     /* State for posting a game to the users library in NOV api */
     const [deleteGameLibrary, setDeleteGameLibrary] = useState(0);
 
@@ -103,7 +107,7 @@ function GameDetail () {
             await postUserLibrary(user.id, addGameLibrary, token, setAddGameLibrary)
         }
         /* Add a check so it doesnt post anything the first time the page renders */
-        if (addGameLibrary !== 0) {
+        if (addGameLibrary.gameId !== 0) {
             addGameToLibrary()
         } else {
             console.log("No game added");
@@ -143,9 +147,10 @@ function GameDetail () {
                             }
                             <AddButton
                                 label={true}
-                                idGame={gameDetails.id}
+                                gameDetails={gameDetails}
                                 library={userLibrary}
                                 addGame={setAddGameLibrary}
+                                addGameLibrary={addGameLibrary}
                                 deleteGame={setDeleteGameLibrary}
                             />
                             {

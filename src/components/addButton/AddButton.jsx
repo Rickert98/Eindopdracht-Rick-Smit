@@ -7,10 +7,10 @@ import addedLibraryButton from '../../assets/add-box-fill.png'
 
 
 
-function AddButton ({label, idGame, library, addGame, deleteGame}) {
-    const id = `add-button-${idGame}`;
+function AddButton ({label, gameDetails, library, addGame, addGameLibrary, deleteGame}) {
+    const id = `add-button-${gameDetails.id}`;
     /* State that toggles when the game is allready owned. When owned use a different image src */
-    const [isOwned, toggleIsOwned] = useState(Boolean(library?.data?.some((game) => game.gameId === idGame)));
+    const [isOwned, toggleIsOwned] = useState(Boolean(library?.data?.some((game) => game.gameId === gameDetails)));
     const [labeltext, setLabeltext] = useState('Add this game to your library');
 
     function handleChange(elementId){
@@ -20,13 +20,18 @@ function AddButton ({label, idGame, library, addGame, deleteGame}) {
             isOwned === false
         ) {
             console.log(`Game is being added to the user library`)
-            addGame(idGame);
+            addGame({
+                ...addGameLibrary,
+                gameId: gameDetails.id,
+                title: gameDetails.name,
+                genres: gameDetails.genres.map((genre)=>{return genre.name}).join(', ')
+            });
             toggleIsOwned(true);
             console.log(isOwned);
             setLabeltext("This game is part of your library");
         } else {
             console.log(`Game is being deleted from the user library`);
-            deleteGame(idGame);
+            deleteGame(gameDetails.id);
             toggleIsOwned(false);
             console.log(isOwned);
             setLabeltext("Add this game to your library");

@@ -52,6 +52,16 @@
           "name": "gameId",
           "type": "number",
           "required": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "genre",
+          "type": "string",
+          "required": true
         }
       ],
       "permissions": {
