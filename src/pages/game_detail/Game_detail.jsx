@@ -23,7 +23,9 @@ function GameDetail () {
     const [addGameLibrary, setAddGameLibrary] = useState({
         gameId: 0,
         title: '',
-        genres: ''
+        genres: '',
+        background: '',
+        platforms: ''
     });
     /* State for posting a game to the users library in NOV api */
     const [deleteGameLibrary, setDeleteGameLibrary] = useState(0);

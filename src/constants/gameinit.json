@@ -62,7 +62,18 @@
           "name": "genre",
           "type": "string",
           "required": true
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "platforms",
+          "type": "string",
+          "required": true
         }
+
       ],
       "permissions": {
         "GET": [

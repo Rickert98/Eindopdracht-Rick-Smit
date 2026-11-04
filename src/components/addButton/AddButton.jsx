@@ -20,11 +20,14 @@ function AddButton ({label, gameDetails, library, addGame, addGameLibrary, delet
             isOwned === false
         ) {
             console.log(`Game is being added to the user library`)
+            console.log(gameDetails)
             addGame({
                 ...addGameLibrary,
                 gameId: gameDetails.id,
                 title: gameDetails.name,
-                genres: gameDetails.genres.map((genre)=>{return genre.name}).join(', ')
+                genres: gameDetails.genres.map((genre)=>{return genre.name}).join(', '),
+                background: gameDetails.background_image,
+                platforms: gameDetails.platforms.map((platform)=>{return platform.platform.name}).join(', ')
             });
             toggleIsOwned(true);
             console.log(isOwned);

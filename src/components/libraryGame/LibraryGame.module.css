@@ -1,0 +1,35 @@
+.list-item {
+    list-style: none;
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 500px;
+    max-height: 100px;
+    flex-wrap: nowrap;
+    background: none;
+    border: none;
+}
+
+.image-wrapper {
+    flex-basis: 200px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px 0 0 5px;
+}
+
+.details-wrapper {
+    flex-shrink:2;
+    flex-grow:1;
+    background-color: var(--color-tertiary);
+    border-radius: 0 5px 5px 0;
+}
+

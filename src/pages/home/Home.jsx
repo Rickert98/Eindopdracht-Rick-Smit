@@ -48,8 +48,9 @@ function Home () {
             console.error(e);
         }
     }
-
-
+/* FIX THIS LATER WHEN RAWG WORKS OR IF IT DOESNT WORK SWTICH TO SOMETHING ELSE */
+    const apiRAWG = 'https://api.rawg.io/api/games';
+    const apiPhalco = 'https://rawg2steam.phalco.de/api/games?search=query';
 
     useEffect (() => {
         /* Upon refresh fetch games from RAWG api and fetch userLibrary */
@@ -58,7 +59,7 @@ function Home () {
 
             try {
                 /* Fetch popular games from RAWG */
-                const popularGames = await axios.get('https://api.rawg.io/api/games', {
+                const popularGames = await axios.get(apiRAWG, {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 6,
@@ -69,7 +70,7 @@ function Home () {
                 console.log(popularGames);
 
                 /* Fetch recent games from RAWG */
-                const recentGames = await axios.get('https://api.rawg.io/api/games', {
+                const recentGames = await axios.get(apiRAWG, {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 20,

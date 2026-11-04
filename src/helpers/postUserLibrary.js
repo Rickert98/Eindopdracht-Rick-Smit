@@ -2,12 +2,21 @@ import axios from 'axios';
 
 async function postUserLibrary(userId, game, token, setAddGameLibrary) {
     console.log("trying to post the game in the novi library ")
+    console.log(game)
+    console.log(userId);
+    console.log(game.gameId);
+    console.log(game.title);
+    console.log(game.genres);
+    console.log(game.background_image);
+    console.log(game.platforms);
     try {
         const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
             "userId": userId,
             "gameId": game.gameId,
             "title": game.title,
-            "genre": `${game.genres}`
+            "genre": game.genres,
+            "background": game.background,
+            "platforms": game.platforms
 
         }, {
             headers: {

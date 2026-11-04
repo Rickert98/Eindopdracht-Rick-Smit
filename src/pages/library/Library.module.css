@@ -1,0 +1,44 @@
+.library-outer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.library-inner-container {
+    display: flex;
+    gap: 10px;
+}
+
+.page-title {
+    text-align: center;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.library {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filter-button {
+    text-align: center;
+    padding: 5px;
+    width: 150px;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+    background-color: var(--color-tertiary);
+}
+
+.filter-button:has(.radio-button:checked) {
+    background-color: var(--color-quaternary);
+}
+
+.radio-button {
+    appearance: none;
+}
+

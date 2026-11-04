@@ -13,9 +13,9 @@ async function fetchUserLibrary(user, setUserLibrary) {
                     'accept': '*/*',
                 }
             });
-            setUserLibrary(library);
+            setUserLibrary(library.data);
             console.log(`De userlibrary bestaat uit: `);
-            console.log(library)
+            console.log(library.data)
         } catch(e) {
             console.error(e);
         }
