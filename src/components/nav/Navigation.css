@@ -2,12 +2,32 @@
     display: flex;
     justify-content: center;
     gap: 30px;
+    padding: 10px;
     background-color: var(--color-secondary);
 }
 
 .nav_li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100px;
+    padding: 5px 0 5px 0;
+
     list-style-type: none;
+    /*background-color: red;
+    border-radius: 20px;*/
 }
 
+.nav-link-active {
+    border-bottom: 1px solid black;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.nav-link-inactive {
+    border-bottom: none;
+    text-decoration: none;
+    font-size: 24px;
+}
 
 

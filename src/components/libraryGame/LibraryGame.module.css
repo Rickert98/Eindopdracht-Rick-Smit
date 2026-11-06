@@ -1,5 +1,6 @@
 .list-item {
     list-style: none;
+    flex-grow: 0;
 }
 
 .button {
@@ -32,4 +33,15 @@
     background-color: var(--color-tertiary);
     border-radius: 0 5px 5px 0;
 }
+
+.details-header, .detail{
+    text-align: start;
+    margin-left: 5px;
+}
+
+.details-header{
+    margin-bottom: 15px;
+}
+
+
 

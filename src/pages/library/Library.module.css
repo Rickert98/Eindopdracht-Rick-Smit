@@ -7,7 +7,7 @@
 .library-inner-container {
     display: flex;
     gap: 10px;
-}
+   }
 
 .page-title {
     text-align: center;
@@ -17,11 +17,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: var(--color-primary-lighter);
 }
 
 .library {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -29,7 +34,6 @@
     text-align: center;
     padding: 5px;
     width: 150px;
-    /*border: 1px solid black;*/
     border-radius: 5px;
     background-color: var(--color-tertiary);
 }
