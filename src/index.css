@@ -15,10 +15,29 @@
     */
     --color-quaternary: #6966FF;
     --color-primary-lighter: #414950;
-
-
 }
 
 button :hover {
     cursor: pointer;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 3.4rem;
+}
+
+h2 {
+    font-size: 2.0rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+p {
+    font-size: 1.0rem;
 }

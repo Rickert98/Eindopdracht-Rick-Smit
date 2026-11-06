@@ -10,7 +10,7 @@ function LibraryGameArticle ({game, filters}) {
                         <img src={game.background} alt="background image" className={styles['image']}/>
                     </div>
                     <div className={styles['details-wrapper']}>
-                        <h2 className={styles['details-header']}>{game.title}</h2>
+                        <h3 className={styles['details-header']}>{game.title}</h3>
                         <p className={styles['detail']}>{game.platforms}</p>
                     </div>
                 </button>
@@ -25,7 +25,7 @@ function LibraryGameArticle ({game, filters}) {
                             <img src={game.background} alt="background image" className={styles['image']}/>
                         </div>
                         <div className={styles['details-wrapper']}>
-                            <h2 className={styles['details-header']}>{game.title}</h2>
+                            <h3 className={styles['details-header']}>{game.title}</h3>
                             <p className={styles['detail']}>{game.platforms}</p>
                         </div>
                     </button>

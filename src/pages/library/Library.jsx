@@ -79,7 +79,7 @@ function Library () {
                                     <aside className={styles['filter-container']}>
                                         {
                                             <>
-                                            <p>Filters</p>
+                                            <h3>Filters</h3>
                                                 {genres.map((genre, index) => {
                                                     return (
                                                         <label key={`filter-${genre}`}

@@ -23,6 +23,10 @@
     background-color: var(--color-primary-lighter);
 }
 
+.filter-container h3 {
+    text-align: center;
+}
+
 .library {
     display: flex;
     flex-direction: row;
