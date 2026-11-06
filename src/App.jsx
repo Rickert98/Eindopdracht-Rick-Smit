@@ -17,10 +17,11 @@ import Login from './pages/login/Login.jsx';
 import Register from './pages/register/Register.jsx';
 import GameDetail from './pages/game_detail/Game_detail.jsx';
 
-const {isAuth} = useContext(AuthContext);
+
 
 /* 2.0 Function App ==================================================================================================*/
 function App() {
+    const {isAuth} = useContext(AuthContext);
     return (
         <>
             {<Navigation/>}

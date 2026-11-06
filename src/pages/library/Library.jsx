@@ -78,21 +78,27 @@ function Library () {
                                 <div className={styles['library-inner-container']}>
                                     <aside className={styles['filter-container']}>
                                         {
-                                            genres.map((genre, index)=> {
-                                                return (
-                                                    <label key={`filter-${genre}`} className={styles['filter-button']}>
-                                                        {genre}
-                                                        <input
-                                                            type="radio"
-                                                            name="library-filter"
-                                                            id={`library-filter-${index}`}
-                                                            onChange={(()=>{setFilter(genre)})}
-                                                            checked={filter===genre}
-                                                            className={styles['radio-button']}
-                                                        />
-                                                    </label>
-                                                )
-                                            })
+                                            <>
+                                            <p>Filters</p>
+                                                {genres.map((genre, index) => {
+                                                    return (
+                                                        <label key={`filter-${genre}`}
+                                                               className={styles['filter-button']}>
+                                                            {genre}
+                                                            <input
+                                                                type="radio"
+                                                                name="library-filter"
+                                                                id={`library-filter-${index}`}
+                                                                onChange={(() => {
+                                                                    setFilter(genre)
+                                                                })}
+                                                                checked={filter === genre}
+                                                                className={styles['radio-button']}
+                                                            />
+                                                        </label>
+                                                    )
+                                                })}
+                                    </>
                                         }
                                     </aside>
                                     <ul className={styles['library']}>
