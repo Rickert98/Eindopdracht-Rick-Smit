@@ -3,6 +3,8 @@ import {useContext, useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import parse from 'html-react-parser';
 
+import mockGamesDetail from '../../constants/mockGamesDetail.json'
+
 import Specs from '../../components/detailPageSpecs/detailPageSpecs.jsx';
 import SpecLister from '../../helpers/SpecLister.js';
 import UserReviewScore from '../../helpers/UserReviewScore.js';
@@ -16,7 +18,7 @@ import styles from './Game_detail.module.css';
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 function GameDetail () {
-    const [gameDetails, setGameDetails] = useState([]);
+    const [gameDetails, setGameDetails] = useState(null);
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
     /* State for posting a game to the users library in NOVI api */
@@ -40,52 +42,73 @@ function GameDetail () {
     useEffect(() => {
         const controller = new AbortController();
 
-        async function fetchGame(id) {
+        async function fetchGame(targetId) {
             toggleLoading(true);
             toggleError(false);
 
             try {
-                const result = await axios.get(`https://api.rawg.io/api/games/${id}`,{
+                const result = await axios.get(`https://api.rawg.io/api/games/${targetId}`,{
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                     },
                     signal: controller.signal,
                 });
-                setGameDetails(result.data);
-                console.log(result.data);
                 /* Also fetch userLibrary so we know if the game is allready owned by the user */
                 await fetchUserLibrary(user.id, setUserLibrary);
+
+                /* Throw error when RAWG api isn't working. */
+                if(!result.ok) {
+                    throw new Error(`API error: ${fetchGame.status}`)
+                }
+                setGameDetails(result.data);
+                console.log(result.data);
             } catch(e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled');
                 } else {
+                    console.warn(
+                        "RAWG API not available, switching to mockdata"
+                    )
+                    console.log('mockgamesdetails');
+                    console.log(mockGamesDetail[targetId])
                     console.error(e);
                     toggleError(true);
+                    setGameDetails(mockGamesDetail[targetId]);
                 }
             } finally {
                 toggleLoading(false);
             }
         }
 
-        async function fetchScreenshots(id) {
+        async function fetchScreenshots(targetId) {
             toggleLoading(true);
             toggleError(false);
 
             try {
-                const result = await axios.get(`https://api.rawg.io/api/games/${id}/screenshots`,{
+                const result = await axios.get(`https://api.rawg.io/api/games/${targetId}/screenshots`,{
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                     },
                     signal: controller.signal,
                 });
+
+                /* Throw error when RAWG api isn't working. */
+                if(!result.ok) {
+                    throw new Error(`API error: ${fetchScreenshots.status}`)
+                }
                 setGameScreenshots(result.data.results);
                 console.log(result);
             } catch(e) {
                 if (axios.isCancel(e)) {
                     console.error('Request is canceled');
                 } else {
+                    console.warn(
+                        "RAWG API not available, switching to mockdata"
+                    )
+                    setGameDetails(mockGamesDetail[targetId]?.screenshots);
                     console.error(e);
                     toggleError(true);
+
                 }
             } finally {
                 toggleLoading(false);
@@ -135,7 +158,7 @@ function GameDetail () {
 
     return (
         <>
-            {gameDetails &&
+            {gameDetails  &&
                 <div className='inner-content-container detail_page'>
                     <header className={styles["header"]}>
                         <img className={styles['header_background']} src={gameDetails.background_image} alt='background image'/>

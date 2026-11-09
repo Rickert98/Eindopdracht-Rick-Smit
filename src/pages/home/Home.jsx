@@ -1,11 +1,11 @@
 import axios from 'axios';
 import {useContext, useEffect, useState} from 'react';
+import { AuthContext } from '../../context/AuthContext.jsx';
+
+import mockGames from '../../constants/mockGames.json'
 
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
-
-import { AuthContext } from '../../context/AuthContext.jsx';
-
 
 import './Home.css';
 
@@ -24,12 +24,11 @@ function Home () {
     /* ============================================================================= Set States for possible errors */
 
     const token = localStorage.getItem('token');
-
+    const API_URL_RAWG = 'https://api.rawg.io/api/games';
 
     async function putUserLibrary(gameId) {
         console.log(token)
         const { user } = useContext(AuthContext);
-
         try {
             const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
                 "userId": user.id,
@@ -48,29 +47,43 @@ function Home () {
             console.error(e);
         }
     }
-/* FIX THIS LATER WHEN RAWG WORKS OR IF IT DOESNT WORK SWTICH TO SOMETHING ELSE */
-    const apiRAWG = 'https://api.rawg.io/api/games';
-    const apiPhalco = 'https://rawg2steam.phalco.de/api/games?search=query';
 
     useEffect (() => {
         /* Upon refresh fetch games from RAWG api and fetch userLibrary */
-        async function fetchGames () {
+        async function fetchPopularGames () {
             console.log(user);
-
             try {
                 /* Fetch popular games from RAWG */
-                const popularGames = await axios.get(apiRAWG, {
+                const popularGames = await axios.get(API_URL_RAWG, {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 6,
                         ordering: '-added',
                     },
                 });
+
+                if (!popularGames.ok) {
+                    throw new Error(`API error: ${popularGames.status}`)
+                }
+
                 setGamesPopular (popularGames.data.results)
                 console.log(popularGames);
 
+
+            } catch (e){
+                console.warn(
+                    "RAWG API not available, switching to mockdata"
+                )
+                console.error(e);
+                setGamesPopular(mockGames.results);
+            }
+        }
+
+        async function fetchRecentGames () {
+            console.log(user);
+            try {
                 /* Fetch recent games from RAWG */
-                const recentGames = await axios.get(apiRAWG, {
+                const recentGames = await axios.get(API_URL_RAWG, {
                     params: {
                         key: import.meta.env.VITE_API_KEY,
                         page_size: 20,
@@ -78,14 +91,25 @@ function Home () {
                         metacritic: '40, 100',
                     },
                 });
+
+                /* Throw error when RAWG api isn't working. */
+                if (!fetchRecentGames.ok) {
+                    throw new Error(`API error: ${fetchRecentGames.status}`)
+                }
+
                 setGamesRecent (recentGames.data.results)
                 console.log(recentGames);
+
             } catch (e){
+                console.warn(
+                    "RAWG API not available, switching to mockdata"
+                )
                 console.error(e);
+                setGamesRecent(mockGames.results);
             }
         }
-        fetchGames();
-
+        fetchPopularGames();
+        fetchRecentGames();
         fetchUserLibrary();
     }, []);
 

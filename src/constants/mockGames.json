@@ -1,0 +1,575 @@
+{
+  "count": 5000,
+  "next": "https://api.rawg.io/api/games?key=YOUR_KEY&page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 3498,
+      "slug": "grand-theft-auto-v",
+      "name": "Grand Theft Auto V",
+      "released": "2013-09-17",
+      "tba": false,
+      "background_image": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/9ca23774eb886a9dce533874723e35ce7a825f5d.png",
+      "rating": 4.47,
+      "rating_top": 5,
+      "ratings_count": 6821,
+      "reviews_text_count": 56,
+      "added": 20450,
+      "added_by_status": {
+        "yet": 520,
+        "owned": 11850,
+        "beaten": 5680,
+        "toplay": 610,
+        "dropped": 1040,
+        "playing": 750
+      },
+      "metacritic": 92,
+      "playtime": 74,
+      "suggestions_count": 425,
+      "updated": "2024-01-15T12:00:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        {
+          "platform": { "id": 4, "name": "PC", "slug": "pc" },
+          "released_at": "2015-04-14",
+          "requirements": {
+            "minimum": "OS: Windows 10 64 Bit, Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz, Memory: 4 GB RAM",
+            "recommended": "OS: Windows 10 64 Bit, Processor: Intel Core i5 3470 @ 3.2GHz, Memory: 8 GB RAM"
+          }
+        },
+        {
+          "platform": { "id": 18, "name": "PlayStation 4", "slug": "playstation4" },
+          "released_at": "2014-11-18",
+          "requirements": {}
+        }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 3, "name": "Adventure", "slug": "adventure" }
+      ],
+      "stores": [
+        {
+          "id": 290375,
+          "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" }
+        },
+        {
+          "id": 438095,
+          "store": { "id": 11, "name": "Epic Games", "slug": "epic-games", "domain": "epicgames.com" }
+        }
+      ],
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/224f9a314a45e5828e9af56153f8871c06290689.png"
+        },
+        {
+          "id": 1,
+          "image": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/24ba6644deb404944cdbe64705285bbad80154a4.jpg"
+        },
+        {
+          "id": 2,
+          "image": "https://media-rockstargames-com.akamaized.net/tina-uploads/tina-modules/gta-v/24ba6644deb404944cdbe64705285bbad80154a4.jpg"
+        }
+      ]
+    },
+    {
+      "id": 3328,
+      "slug": "the-witcher-3-wild-hunt",
+      "name": "The Witcher 3: Wild Hunt",
+      "released": "2015-05-18",
+      "tba": false,
+      "background_image": "https://public.cdn.cdpr.app/thewitcher/website/build/3027846432-537a5ede/_next/static/media/1.1v2rkvnnck1vb.jpg",
+      "rating": 4.65,
+      "rating_top": 5,
+      "ratings_count": 6430,
+      "reviews_text_count": 49,
+      "added": 19600,
+      "added_by_status": {
+        "yet": 480,
+        "owned": 11200,
+        "beaten": 5800,
+        "toplay": 720,
+        "dropped": 850,
+        "playing": 550
+      },
+      "metacritic": 92,
+      "playtime": 46,
+      "suggestions_count": 670,
+      "updated": "2024-01-10T08:30:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        {
+          "platform": { "id": 4, "name": "PC", "slug": "pc" },
+          "released_at": "2015-05-18",
+          "requirements": {}
+        }
+      ],
+      "genres": [
+        { "id": 5, "name": "RPG", "slug": "role-playing-games-rpg" },
+        { "id": 4, "name": "Action", "slug": "action" }
+      ],
+      "stores": [
+        {
+          "id": 35478,
+          "store": { "id": 3, "name": "PlayStation Store", "slug": "playstation-store", "domain": "store.playstation.com" }
+        }
+      ],
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://public.cdn.cdpr.app/thewitcher/website/build/3027846432-537a5ede/_next/static/media/3.214jklslg-ajt.jpg"
+        },
+        {
+          "id": 1,
+          "image": "https://public.cdn.cdpr.app/thewitcher/website/build/3027846432-537a5ede/_next/static/media/3.214jklslg-ajt.jpg"
+        },
+        {
+          "id": 2,
+          "image": "https://public.cdn.cdpr.app/thewitcher/website/build/3027846432-537a5ede/_next/static/media/3.214jklslg-ajt.jpg"
+        }
+      ]
+    },
+    {
+      "id": 4200,
+      "slug": "portal-2",
+      "name": "Portal 2",
+      "released": "2011-04-18",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200",
+      "rating": 4.61,
+      "rating_top": 5,
+      "ratings_count": 5580,
+      "reviews_text_count": 34,
+      "added": 18400,
+      "added_by_status": {
+        "yet": 390,
+        "owned": 11400,
+        "beaten": 5300,
+        "toplay": 410,
+        "dropped": 480,
+        "playing": 420
+      },
+      "metacritic": 95,
+      "playtime": 11,
+      "suggestions_count": 545,
+      "updated": "2024-01-12T14:10:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } },
+        { "platform": { "id": 7, "name": "Nintendo", "slug": "nintendo" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2011-04-18", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 2, "name": "Shooter", "slug": "shooter" },
+        { "id": 7, "name": "Puzzle", "slug": "puzzle" }
+      ],
+      "stores": [
+        { "id": 46569, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200" }
+      ]
+    },
+    {
+      "id": 5286,
+      "slug": "tomb-raider",
+      "name": "Tomb Raider (2013)",
+      "released": "2013-03-05",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=1200",
+      "rating": 4.05,
+      "rating_top": 4,
+      "ratings_count": 3900,
+      "reviews_text_count": 22,
+      "added": 16100,
+      "added_by_status": {
+        "yet": 420,
+        "owned": 10500,
+        "beaten": 4100,
+        "toplay": 350,
+        "dropped": 430,
+        "playing": 300
+      },
+      "metacritic": 86,
+      "playtime": 10,
+      "suggestions_count": 440,
+      "updated": "2024-01-08T09:15:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2013-03-05", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 3, "name": "Adventure", "slug": "adventure" }
+      ],
+      "stores": [
+        { "id": 7940, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=1200" }
+      ]
+    },
+    {
+      "id": 12020,
+      "slug": "left-4-dead-2",
+      "name": "Left 4 Dead 2",
+      "released": "2009-11-17",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200",
+      "rating": 4.09,
+      "rating_top": 4,
+      "ratings_count": 3410,
+      "reviews_text_count": 18,
+      "added": 15600,
+      "added_by_status": {
+        "yet": 210,
+        "owned": 11200,
+        "beaten": 3200,
+        "toplay": 280,
+        "dropped": 410,
+        "playing": 300
+      },
+      "metacritic": 89,
+      "playtime": 9,
+      "suggestions_count": 480,
+      "updated": "2024-01-05T18:00:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2009-11-17", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 2, "name": "Shooter", "slug": "shooter" }
+      ],
+      "stores": [
+        { "id": 16408, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200" }
+      ]
+    },
+    {
+      "id": 5679,
+      "slug": "the-elder-scrolls-v-skyrim",
+      "name": "The Elder Scrolls V: Skyrim",
+      "released": "2011-11-11",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200",
+      "rating": 4.42,
+      "rating_top": 5,
+      "ratings_count": 4650,
+      "reviews_text_count": 30,
+      "added": 15200,
+      "added_by_status": {
+        "yet": 340,
+        "owned": 9400,
+        "beaten": 4100,
+        "toplay": 460,
+        "dropped": 520,
+        "playing": 380
+      },
+      "metacritic": 94,
+      "playtime": 46,
+      "suggestions_count": 590,
+      "updated": "2024-01-14T11:20:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } },
+        { "platform": { "id": 7, "name": "Nintendo", "slug": "nintendo" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2011-11-11", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 5, "name": "RPG", "slug": "role-playing-games-rpg" },
+        { "id": 4, "name": "Action", "slug": "action" }
+      ],
+      "stores": [
+        { "id": 4943, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200" }
+      ]
+    },
+    {
+      "id": 28,
+      "slug": "red-dead-redemption-2",
+      "name": "Red Dead Redemption 2",
+      "released": "2018-10-26",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200",
+      "rating": 4.59,
+      "rating_top": 5,
+      "ratings_count": 5120,
+      "reviews_text_count": 62,
+      "added": 14900,
+      "added_by_status": {
+        "yet": 710,
+        "owned": 8200,
+        "beaten": 4120,
+        "toplay": 890,
+        "dropped": 480,
+        "playing": 500
+      },
+      "metacritic": 97,
+      "playtime": 70,
+      "suggestions_count": 520,
+      "updated": "2024-01-16T10:00:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2019-12-05", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 3, "name": "Adventure", "slug": "adventure" }
+      ],
+      "stores": [
+        { "id": 32321, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200" }
+      ]
+    },
+    {
+      "id": 13536,
+      "slug": "hollow-knight",
+      "name": "Hollow Knight",
+      "released": "2017-02-24",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200",
+      "rating": 4.41,
+      "rating_top": 5,
+      "ratings_count": 3100,
+      "reviews_text_count": 28,
+      "added": 10500,
+      "added_by_status": {
+        "yet": 510,
+        "owned": 5400,
+        "beaten": 2900,
+        "toplay": 920,
+        "dropped": 490,
+        "playing": 280
+      },
+      "metacritic": 90,
+      "playtime": 27,
+      "suggestions_count": 495,
+      "updated": "2024-01-11T16:40:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } },
+        { "platform": { "id": 7, "name": "Nintendo", "slug": "nintendo" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2017-02-24", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 51, "name": "Indie", "slug": "indie" },
+        { "id": 83, "name": "Platformer", "slug": "platformer" }
+      ],
+      "stores": [
+        { "id": 21876, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200" }
+      ]
+    },
+    {
+      "id": 58175,
+      "slug": "god-of-war-2",
+      "name": "God of War (2018)",
+      "released": "2018-04-20",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200",
+      "rating": 4.58,
+      "rating_top": 5,
+      "ratings_count": 3950,
+      "reviews_text_count": 41,
+      "added": 12800,
+      "added_by_status": {
+        "yet": 420,
+        "owned": 6900,
+        "beaten": 4100,
+        "toplay": 680,
+        "dropped": 280,
+        "playing": 420
+      },
+      "metacritic": 94,
+      "playtime": 30,
+      "suggestions_count": 510,
+      "updated": "2024-01-13T15:00:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 18, "name": "PlayStation 4", "slug": "playstation4" }, "released_at": "2018-04-20", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 3, "name": "Adventure", "slug": "adventure" }
+      ],
+      "stores": [
+        { "id": 61234, "store": { "id": 3, "name": "PlayStation Store", "slug": "playstation-store", "domain": "store.playstation.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200" }
+      ]
+    },
+    {
+      "id": 22511,
+      "slug": "cyberpunk-2077",
+      "name": "Cyberpunk 2077",
+      "released": "2020-12-10",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200",
+      "rating": 4.14,
+      "rating_top": 4,
+      "ratings_count": 4120,
+      "reviews_text_count": 58,
+      "added": 13900,
+      "added_by_status": {
+        "yet": 650,
+        "owned": 8100,
+        "beaten": 3100,
+        "toplay": 880,
+        "dropped": 620,
+        "playing": 550
+      },
+      "metacritic": 86,
+      "playtime": 45,
+      "suggestions_count": 610,
+      "updated": "2024-01-15T09:30:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2020-12-10", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 5, "name": "RPG", "slug": "role-playing-games-rpg" }
+      ],
+      "stores": [
+        { "id": 41203, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200" }
+      ]
+    },
+    {
+      "id": 27471,
+      "slug": "elden-ring",
+      "name": "Elden Ring",
+      "released": "2022-02-25",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1200",
+      "rating": 4.56,
+      "rating_top": 5,
+      "ratings_count": 3200,
+      "reviews_text_count": 44,
+      "added": 11400,
+      "added_by_status": {
+        "yet": 580,
+        "owned": 6100,
+        "beaten": 2800,
+        "toplay": 990,
+        "dropped": 410,
+        "playing": 520
+      },
+      "metacritic": 96,
+      "playtime": 54,
+      "suggestions_count": 580,
+      "updated": "2024-01-14T20:10:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2022-02-25", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 5, "name": "RPG", "slug": "role-playing-games-rpg" }
+      ],
+      "stores": [
+        { "id": 58210, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1200" }
+      ]
+    },
+    {
+      "id": 29085,
+      "slug": "hades",
+      "name": "Hades",
+      "released": "2020-09-17",
+      "tba": false,
+      "background_image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200",
+      "rating": 4.52,
+      "rating_top": 5,
+      "ratings_count": 2850,
+      "reviews_text_count": 25,
+      "added": 9800,
+      "added_by_status": {
+        "yet": 310,
+        "owned": 5600,
+        "beaten": 2600,
+        "toplay": 620,
+        "dropped": 340,
+        "playing": 330
+      },
+      "metacritic": 93,
+      "playtime": 35,
+      "suggestions_count": 460,
+      "updated": "2024-01-09T13:45:00Z",
+      "parent_platforms": [
+        { "platform": { "id": 1, "name": "PC", "slug": "pc" } },
+        { "platform": { "id": 2, "name": "PlayStation", "slug": "playstation" } },
+        { "platform": { "id": 3, "name": "Xbox", "slug": "xbox" } },
+        { "platform": { "id": 7, "name": "Nintendo", "slug": "nintendo" } }
+      ],
+      "platforms": [
+        { "platform": { "id": 4, "name": "PC", "slug": "pc" }, "released_at": "2020-09-17", "requirements": {} }
+      ],
+      "genres": [
+        { "id": 4, "name": "Action", "slug": "action" },
+        { "id": 51, "name": "Indie", "slug": "indie" }
+      ],
+      "stores": [
+        { "id": 39012, "store": { "id": 1, "name": "Steam", "slug": "steam", "domain": "store.steampowered.com" } }
+      ],
+      "short_screenshots": [
+        { "id": -1, "image": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200" }
+      ]
+    }
+  ]
+}
+
