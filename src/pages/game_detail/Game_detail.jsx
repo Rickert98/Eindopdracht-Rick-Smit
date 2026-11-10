@@ -18,7 +18,7 @@ import styles from './Game_detail.module.css';
 import {AuthContext} from "../../context/AuthContext.jsx";
 
 function GameDetail () {
-    const [gameDetails, setGameDetails] = useState(null);
+    const [gameDetails, setGameDetails] = useState();
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
     /* State for posting a game to the users library in NOVI api */
@@ -31,7 +31,6 @@ function GameDetail () {
     });
     /* State for posting a game to the users library in NOV api */
     const [deleteGameLibrary, setDeleteGameLibrary] = useState(0);
-
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
     const {id} = useParams();
@@ -73,7 +72,7 @@ function GameDetail () {
                     console.log(mockGamesDetail[targetId])
                     console.error(e);
                     toggleError(true);
-                    setGameDetails(mockGamesDetail[targetId]);
+                    await setGameDetails(mockGamesDetail[targetId]);
                 }
             } finally {
                 toggleLoading(false);
@@ -105,10 +104,11 @@ function GameDetail () {
                     console.warn(
                         "RAWG API not available, switching to mockdata"
                     )
-                    setGameDetails(mockGamesDetail[targetId]?.screenshots);
+                    console.log('mockgamesscreenshots');
+                    console.log(mockGamesDetail[targetId]?.screenshots);
                     console.error(e);
                     toggleError(true);
-
+                    await setGameScreenshots(mockGamesDetail[targetId]?.screenshots);
                 }
             } finally {
                 toggleLoading(false);
@@ -118,9 +118,9 @@ function GameDetail () {
         fetchGame(id);
         fetchScreenshots(id);
 
-        console.log(gameScreenshots);
-
         return function cleanup() {
+            console.log("screenshots")
+            console.log(gameScreenshots);
             controller.abort();
         }
     }, [])
@@ -158,7 +158,7 @@ function GameDetail () {
 
     return (
         <>
-            {gameDetails  &&
+            {gameDetails !== undefined && gameScreenshots  &&
                 <div className='inner-content-container detail_page'>
                     <header className={styles["header"]}>
                         <img className={styles['header_background']} src={gameDetails.background_image} alt='background image'/>
@@ -230,10 +230,6 @@ function GameDetail () {
                                                 />
                                             }
                                         </article>
-
-
-
-
                                     </div>
                                 </div>
                                 {gameScreenshots &&
