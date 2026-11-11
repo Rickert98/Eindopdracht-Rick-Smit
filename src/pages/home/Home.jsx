@@ -20,6 +20,7 @@ function Home () {
     const [gamesRecent, setGamesRecent] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
     const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
+    const [loading, toggleLoading] = useState(false);
 
     /* ============================================================================= Set States for possible errors */
 
@@ -49,6 +50,7 @@ function Home () {
     }
 
     useEffect (() => {
+        toggleLoading(true);
         /* Upon refresh fetch games from RAWG api and fetch userLibrary */
         async function fetchPopularGames () {
             console.log(user);
@@ -100,6 +102,8 @@ function Home () {
                 setGamesRecent (recentGames.data.results)
                 console.log(recentGames);
 
+                console.log("loading set to false")
+                toggleLoading(false);
             } catch (e){
                 console.warn(
                     "RAWG API not available, switching to mockdata"
@@ -111,6 +115,8 @@ function Home () {
         fetchPopularGames();
         fetchRecentGames();
         fetchUserLibrary();
+
+
     }, []);
 
 
@@ -211,6 +217,7 @@ function Home () {
                         </ul>
                     </section>
                 )}
+                {loading === true && <p>Loading...</p> }
             </div>
         </>
     )

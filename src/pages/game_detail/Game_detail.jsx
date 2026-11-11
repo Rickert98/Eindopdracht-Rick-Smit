@@ -40,9 +40,9 @@ function GameDetail () {
     /* Fetch game data upon refresh */
     useEffect(() => {
         const controller = new AbortController();
+        toggleLoading(true);
 
         async function fetchGame(targetId) {
-            toggleLoading(true);
             toggleError(false);
 
             try {
@@ -80,7 +80,6 @@ function GameDetail () {
         }
 
         async function fetchScreenshots(targetId) {
-            toggleLoading(true);
             toggleError(false);
 
             try {
@@ -246,14 +245,13 @@ function GameDetail () {
                                 }
                             </>
                         }
-                        {loading && <p>Loading...</p>}
-                        {error && <p>Er ging iets mis met het ophalen van de data...</p>}
+
                     </section>
                 </div>
             }
+            {loading === true && <p>Loading...</p>}
+            {error && <p>Er ging iets mis met het ophalen van de data...</p>}
         </>
-
-
     )
 }
 
