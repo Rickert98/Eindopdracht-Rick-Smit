@@ -29,7 +29,6 @@ function Home () {
 
     async function putUserLibrary(gameId) {
         console.log(token)
-        const { user } = useContext(AuthContext);
         try {
             const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
                 "userId": user.id,

@@ -11,7 +11,7 @@ import './App.css';
 /* === 1.3 Components import =========================================================================================*/
 import Navigation from './components/nav/Navigation.jsx';
 import Home from './pages/home/Home.jsx';
-import Profile from './pages/wishlist/Wishlist.jsx';
+import Profile from './pages/profile/Profile.jsx';
 import Library from './pages/library/Library.jsx';
 import Login from './pages/login/Login.jsx';
 import Register from './pages/register/Register.jsx';
