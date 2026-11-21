@@ -85,17 +85,17 @@ function Profile () {
             {
                 profile &&
                 <>
-                    <div className="header-content-wrapper">
+                    <div className="profile-content-wrapper">
                         <header className="profile-header">
-                            <h1>Welcome {profile.username}</h1>
-                            <h2>Your profile</h2>
+                            <h1 className="profile-header">Welcome {profile.username}</h1>
+                            <h2 className="profile-header">Your profile</h2>
                         </header>
                         <section className='profile-main'>
                             <div className='profile-picture-wrapper'>
                                 <img className='profile-picture' src={profilePicture} alt={profile?.picture?.fileName}/>
                                 {editProfilePicture === true ?
-                                    <section>
-                                        <form onSubmit={formSubmit}>
+                                    <section >
+                                        <form className='profile-form' onSubmit={formSubmit}>
                                             Select a new profile picture
                                             <input
                                                 type="file"
