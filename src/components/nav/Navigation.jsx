@@ -9,31 +9,34 @@ import './Navigation.css';
 
 /* 2.0 Function Navigation ===========================================================================================*/
 function Navigation() {
-    const {isAuth, logout} = useContext(AuthContext);
+    const {isAuth, logout, user} = useContext(AuthContext);
 
     return (
         <nav>
             <ul className="nav_ul">
                 <li className="nav_li">
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink className={({isActive})=> isActive ? 'nav-link-active' : 'nav-link-inactive'} to="/">Home</NavLink>
                 </li>
+
                 <li className="nav_li">
-                    <NavLink to="/wishlist">Wishlist</NavLink>
-                </li>
-                <li className="nav_li">
-                    <NavLink to="/library">Library</NavLink>
+                    <NavLink className={({isActive})=> isActive ? 'nav-link-active' : 'nav-link-inactive'} to="/library">Library</NavLink>
                 </li>
 
 
                 {isAuth ?
-                    <button type="button" onClick={(() =>{logout()})}>Log uit</button>
+                    <>
+                        <li className="nav_li">
+                            <NavLink className={({isActive})=> isActive ? 'nav-link-active' : 'nav-link-inactive'} to={`/userprofile/${user.id}`}>Profile</NavLink>
+                        </li>
+                        <button type="button" onClick={(() =>{logout()})}>Log uit</button>
+                    </>
                     :
                     <>
                         <li className="nav_li">
-                            <NavLink to="/login">Login</NavLink>
+                            <NavLink className={({isActive})=> isActive ? 'nav-link-active' : 'nav-link-inactive'} to="/login">Login</NavLink>
                         </li>
                         <li className="nav_li">
-                            <NavLink to="/register">Registreer</NavLink>
+                            <NavLink className={({isActive})=> isActive ? 'nav-link-active' : 'nav-link-inactive'} to="/register">Registreer</NavLink>
                         </li>
                     </>
                 }

@@ -4,7 +4,7 @@
       "name": "userProfile",
       "fields": [
         {
-          "name": "id",
+          "name": "userId",
           "type": "reference:users",
           "required": true
         },
@@ -18,6 +18,21 @@
         {
           "name": "newsletter",
           "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "imageUrl",
+          "type": "image",
+          "required": false
+        },
+        {
+          "name": "birthday",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "registered",
+          "type": "date",
           "required": true
         }
       ],
@@ -37,6 +52,11 @@
           "user",
           "admin",
           "anonymous"
+        ],
+        "PATCH": [
+          "user",
+          "admin",
+          "anonymous"
         ]
       }
     },
@@ -52,7 +72,28 @@
           "name": "gameId",
           "type": "number",
           "required": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "genre",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "platforms",
+          "type": "string",
+          "required": true
         }
+
       ],
       "permissions": {
         "GET": [
@@ -100,33 +141,146 @@
     "userProfile": [
       {
         "id": 1,
+        "userId": 1,
         "username": "Karel",
-        "newsletter": true
+        "newsletter": true,
+        "imageUrl": {
+          "fileName": "default-profile-picture",
+          "contentType": "image/png",
+          "length": 380,
+          "base64": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAPdJREFUeAHtlNENgjAQhq+ExPIiugB0M3EC4wY4gYzAaOICUJ/gxdqa1FAolFqb+MCXkJQD/uvR/w7AAoLrjODHAXwgxFNMmbhskgTwT8gKbL7xXgEaBgimOWNw4k92YAODBgEqb932PJmARLR4izvA/19+b+OLNkG6obX1zscZmqqL9/JWPQNXcY2G90MOpe2qNkbwQ6SusQL+VimupfEhoUmcO+Io1gmmwhHZXFzHbAVBz2RL1joMFTAxPT9rU9w6wZyASViiNprlIJui70jvfaAm4G0Orgw0lAQIQQGu+oHaGyOPJRG9oif39RfjmvEN9ifpyiJeRHRgYALLn0oAAAAASUVORK5CYII="
+        },
+        "birthday": "1971-08-20",
+        "registered": "2026-11-12"
       },
       {
         "id": 2,
+        "userId": 2,
         "username": "Jan",
-        "newsletter": false
+        "newsletter": false,
+        "imageUrl": {
+          "fileName": "default-profile-picture",
+          "contentType": "image/png",
+          "length": 380,
+          "base64": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAPdJREFUeAHtlNENgjAQhq+ExPIiugB0M3EC4wY4gYzAaOICUJ/gxdqa1FAolFqb+MCXkJQD/uvR/w7AAoLrjODHAXwgxFNMmbhskgTwT8gKbL7xXgEaBgimOWNw4k92YAODBgEqb932PJmARLR4izvA/19+b+OLNkG6obX1zscZmqqL9/JWPQNXcY2G90MOpe2qNkbwQ6SusQL+VimupfEhoUmcO+Io1gmmwhHZXFzHbAVBz2RL1joMFTAxPT9rU9w6wZyASViiNprlIJui70jvfaAm4G0Orgw0lAQIQQGu+oHaGyOPJRG9oif39RfjmvEN9ifpyiJeRHRgYALLn0oAAAAASUVORK5CYII="
+        },
+        "birthday": "1994-01-12",
+        "registered": "2026-08-03"
       }
     ],
     "userLibrary": [
-      {
-        "id": 1,
-        "gameId": [
-          566457,
-          62424,
-          324997,
-          42857
-        ]
-      },
-      {
-        "id": 2,
-        "gameId": [
-          438620,
-          513033,
-          362880
-        ]
-      }
-    ]
+        {
+          "userId": 1,
+          "gameId": 3498,
+          "title": "Grand Theft Auto V",
+          "genre": "Action, Adventure",
+          "background": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One"
+        },
+        {
+          "userId": 1,
+          "gameId": 3328,
+          "title": "The Witcher 3: Wild Hunt",
+          "genre": "RPG, Action",
+          "background": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One, Nintendo Switch"
+        },
+        {
+          "userId": 1,
+          "gameId": 27471,
+          "title": "Elden Ring",
+          "genre": "Action, RPG",
+          "background": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1200",
+          "platforms": "PC, PlayStation 5, Xbox Series S/X"
+        },
+        {
+          "userId": 1,
+          "gameId": 13536,
+          "title": "Hollow Knight",
+          "genre": "Action, Indie, Platformer",
+          "background": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One, Nintendo Switch"
+        },
+        {
+          "userId": 1,
+          "gameId": 58753,
+          "title": "Resident Evil 2 (2019)",
+          "genre": "Action, Horror, Shooter",
+          "background": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=1200",
+          "platforms": "PC, PlayStation 4, PlayStation 5, Xbox One"
+        },
+        {
+          "userId": 1,
+          "gameId": 2454,
+          "title": "DOOM (2016)",
+          "genre": "Action, Shooter",
+          "background": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One, Nintendo Switch"
+        },
+        {
+          "userId": 1,
+          "gameId": 3272,
+          "title": "Alien: Isolation",
+          "genre": "Action, Horror, Stealth",
+          "background": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One, Nintendo Switch"
+        },
+        {
+          "userId": 1,
+          "gameId": 802,
+          "title": "Borderlands 2",
+          "genre": "Action, Shooter, RPG",
+          "background": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One, Nintendo Switch"
+        },
+        {
+          "userId": 1,
+          "gameId": 4291,
+          "title": "Counter-Strike: Global Offensive",
+          "genre": "Action, Shooter",
+          "background": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200",
+          "platforms": "PC, PlayStation 3, Xbox 360"
+        },
+        {
+          "userId": 2,
+          "gameId": 28,
+          "title": "Red Dead Redemption 2",
+          "genre": "Action, Adventure",
+          "background": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1200",
+          "platforms": "PC, PlayStation 4, Xbox One"
+        },
+        {
+          "userId": 2,
+          "gameId": 22511,
+          "title": "Cyberpunk 2077",
+          "genre": "Action, RPG",
+          "background": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1200",
+          "platforms": "PC, PlayStation 5, Xbox Series S/X"
+        },
+        {
+          "userId": 2,
+          "gameId": 4200,
+          "title": "Portal 2",
+          "genre": "Shooter, Puzzle",
+          "background": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200",
+          "platforms": "PC, PlayStation 3, Xbox 360, Nintendo Switch"
+        },
+        {
+          "userId": 2,
+          "gameId": 29085,
+          "title": "Hades",
+          "genre": "Action, Indie",
+          "background": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200",
+          "platforms": "PC, PlayStation 5, Xbox Series S/X, Nintendo Switch"
+        },
+        {
+          "userId": 2,
+          "gameId": 58175,
+          "title": "God of War (2018)",
+          "genre": "Action, Adventure",
+          "background": "https://images.unsplash.com/photo-1563089145-599997674d42?w=1200",
+          "platforms": "PC, PlayStation 4"
+        }
+      ]
   }
 }

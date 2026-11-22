@@ -1,8 +1,5 @@
 import styles from './homepage_gametile.module.css';
-import addLibraryButton from '../../assets/add-box-line.png'
-/*import addedLibraryButton from '../../assets/add-box-fill.png'*/
-import addWishlistButton from '../../assets/heart-line.png'
-/*import addedWishlistButton from '../../assets/heart-fill.png'*/
+
 
 import {useNavigate} from 'react-router-dom';
 
@@ -18,14 +15,6 @@ function GameTile ({background_image, name, genres, released, id}) {
                 <div className={styles['tile-details']}>
                     <p>{genres}</p>
                     <p>{released}</p>
-                    <span>
-                        <button className={styles['add-buttons']} onClick={(() => {console.log("Moet nog functie toevoegen")})}>
-                            <img src={addLibraryButton} alt="add to library button"/>
-                        </button>
-                        <button className={styles['add-buttons']} onClick={(() => {console.log("Moet nog functie toevoegen")})}>
-                            <img src={addWishlistButton} alt="add to wishlist button"/>
-                        </button>
-                    </span>
                 </div>
         </li>
     )

@@ -4,6 +4,7 @@
 import {useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
+import profilePicture from '../../assets/robot-2-fill.png'
 
 function Register () {
     const navigate = useNavigate();
@@ -13,6 +14,9 @@ function Register () {
         password: '',
         username: '',
         newsletter: false,
+        picture: profilePicture,
+        birthday: '',
+        registered: new Date().toISOString().split('T')[0],
 
     });
     const [error, toggleError] = useState(false);
@@ -31,6 +35,8 @@ function Register () {
     async function formSubmit (e) {
         e.preventDefault();
         toggleError(false);
+
+        console.log(formState);
 
         /* Register new user with only the email and the password to the api/users endpoint, according to the api rules */
         try {
@@ -56,6 +62,8 @@ function Register () {
                 'id': createUser.data.id,
                 "username": `${formState.username}`,
                 "newsletter": formState.newsletter,
+                "birthday": formState.birthday,
+                "registered": formState.registered
             },
                 {
                     headers: {
@@ -64,7 +72,7 @@ function Register () {
                         'accept': '*/*',
                     }
                 })
-            console.log("User profile succesfully updated");
+            console.log("User profile succesfully created");
             console.log(createUserProfile);
 
             /* When new user succesfully registered.  Direct user to login page */
@@ -111,13 +119,22 @@ function Register () {
                         />
                     </label>
                     <label className="login-register-label">
+                        Geboortedatum:
+                        <input
+                            type='date'
+                            name='birthday'
+                            value={formState.birthday}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label className="login-register-label">
                         Ik wil graag de nieuwsbrief ontvangen.
                         <input
                             type='checkbox'
                             name="newsletter"
                             value={formState.newsletter}
                             onChange={handleChange}
-                            required
                         />
                     </label>
                     <button type='Submit'>Registreren</button>
