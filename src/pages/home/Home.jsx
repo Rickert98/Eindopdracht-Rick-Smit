@@ -10,8 +10,10 @@ import PopularGames from '../../components/homepage_populargames/homepage_popula
 import './Home.css';
 
 function Home () {
-
-    /* get the user ID and email from the context */
+    const token = localStorage.getItem('token');
+    const API_URL_NOVI = `https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`;
+    const API_URL_RAWG = 'https://api.rawg.io/api/games';
+    const API_KEY_RAWG = import.meta.env.VITE_API_KEY;
     const { user } = useContext(AuthContext);
 
     /* Set States for storing game data */
@@ -20,12 +22,8 @@ function Home () {
     const [gamesRecent, setGamesRecent] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
     const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
+
     const [loading, toggleLoading] = useState(false);
-
-    /* ============================================================================= Set States for possible errors */
-
-    const token = localStorage.getItem('token');
-    const API_URL_RAWG = 'https://api.rawg.io/api/games';
 
     async function putUserLibrary(gameId) {
         console.log(token)
@@ -48,100 +46,93 @@ function Home () {
         }
     }
 
+    /* =================================================================================================================
+                        Upon refresh:
+                                    Fetch games from RAWG
+                                    Fetch userlibrary
+    */
     useEffect (() => {
         toggleLoading(true);
-        /* Upon refresh fetch games from RAWG api and fetch userLibrary */
-        async function fetchPopularGames () {
-            console.log(user);
+        const controller = new AbortController();
+
+        /* Fetch games from RAWG API. SearchQuery can be updated */
+        async function FetchGames (searchQuery, setState) {
             try {
-                console.log("trying to fetch the games")
-                /* Fetch popular games from RAWG */
-                const popularGames = await axios.get(API_URL_RAWG, {
+                const response = await axios.get(API_URL_RAWG, {
                     params: {
-                        key: import.meta.env.VITE_API_KEY,
-                        page_size: 6,
-                        ordering: '-added',
+                        key: API_KEY_RAWG,
+                        ...searchQuery
                     },
+                    signal: controller.signal,
                 });
 
-                if (popularGames.status !== 200) {
-                    throw new Error(`API error: ${popularGames.status}`)
+                /* If RAWG doesnt respond, switch to mockdata */
+                if (response.status !== 200) {
+                    throw new Error(`API error: ${response.status}`);
                 }
-
-                setGamesPopular (popularGames.data.results)
-                console.log(popularGames);
-
-
+                /* If no problem. Set state with the results */
+                setState(response.data.results);
+                console.log("Succesfully received data from RAWG");
             } catch (e){
-                console.warn(
-                    "RAWG API not available, switching to mockdata"
-                )
+                console.warn("RAWG api is not available, switching to mockdata");
                 console.error(e);
-                setGamesPopular(mockGames.results);
+                setState(mockGames.results);
+            }
+            return function cleanup() {
+                controller.abort();
             }
         }
 
-        async function fetchRecentGames () {
-            console.log(user);
-            try {
-                /* Fetch recent games from RAWG */
-                const recentGames = await axios.get(API_URL_RAWG, {
-                    params: {
-                        key: import.meta.env.VITE_API_KEY,
-                        page_size: 20,
-                        ordering: '-released',
-                        metacritic: '40, 100',
-                    },
-                });
-
-                /* Throw error when RAWG api isn't working. */
-                if (recentGames.status !== 200) {
-                    throw new Error(`API error: ${recentGames.status}`)
+        /* Fetch userlibrary to check if some games are allready owned by user. */
+        async function fetchUserLibrary() {
+            if (user !== null) {
+                try {
+                    const library = await axios.get(API_URL_NOVI, {
+                        params: {
+                            userId: user.id
+                        },
+                        headers: {
+                            'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                            'Content-Type': 'application/json',
+                            'accept': '*/*',
+                        },
+                        signal: controller.signal,
+                    });
+                    setUserLibrary(library);
+                    console.log(`De userlibrary bestaat uit: `);
+                    console.log(library)
+                } catch(e) {
+                    console.error(e);
                 }
-
-                setGamesRecent (recentGames.data.results)
-                console.log(recentGames);
-
-                console.log("loading set to false")
-                toggleLoading(false);
-            } catch (e){
-                console.warn(
-                    "RAWG API not available, switching to mockdata"
-                )
-                console.error(e);
-                setGamesRecent(mockGames.results);
+                return function cleanup() {
+                    controller.abort();
+                }
             }
         }
-        fetchPopularGames();
-        fetchRecentGames();
+
+        /* ==========          ==================================================================          ========== */
+        /* Call the fetch games function here. First parameter is used for SearchQuerries, second parameter for State */
+        FetchGames ( {
+            page_size: 6,
+            ordering: '-added',
+        }, setGamesPopular);
+
+        FetchGames ( {
+            page_size: 20,
+            ordering: '-released',
+            metacritic: '40, 100',
+        }, setGamesRecent);
+
+
+        /* Finally fetch user library and set loading to false */
         fetchUserLibrary();
-
-
+        toggleLoading(false);
     }, []);
 
 
-    async function fetchUserLibrary() {
-        if (user !== null) {
-            try {
-                const library = await axios.get(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`, {
-                    params: {
-                        userId: user.id
-                    },
-                    headers: {
-                        'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
-                        'Content-Type': 'application/json',
-                        'accept': '*/*',
-                    }
-                });
-                setUserLibrary(library);
-                console.log(`De userlibrary bestaat uit: `);
-                console.log(library)
-            } catch(e) {
-                console.error(e);
-            }
-        }
-    }
-
+    /* =================================================================================================================
+                        Handles the count for the slider under popular games
+    */
     function handleCount (number) {
         /* State popularCount cant be higher than the number of popular games in stored in the state gamesPopular.
         * Cant be lower than 0 */
@@ -159,6 +150,7 @@ function Home () {
         let radiobtn = document.getElementById(`btn-radio${number}`);
         radiobtn.checked = true;
     }
+    /* ============================================================================================================== */
 
     return (
         <>
