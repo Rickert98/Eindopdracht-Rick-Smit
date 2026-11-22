@@ -56,8 +56,8 @@ function GameDetail () {
                 await fetchUserLibrary(user.id, setUserLibrary);
 
                 /* Throw error when RAWG api isn't working. */
-                if(!result.ok) {
-                    throw new Error(`API error: ${fetchGame.status}`)
+                if(result.status !== 200) {
+                    throw new Error(`API error: ${result.status}`)
                 }
                 setGameDetails(result.data);
                 console.log(result.data);
@@ -91,8 +91,8 @@ function GameDetail () {
                 });
 
                 /* Throw error when RAWG api isn't working. */
-                if(!result.ok) {
-                    throw new Error(`API error: ${fetchScreenshots.status}`)
+                if(result.status !== 200) {
+                    throw new Error(`API error: ${result.status}`)
                 }
                 setGameScreenshots(result.data.results);
                 console.log(result);

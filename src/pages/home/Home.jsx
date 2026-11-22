@@ -54,6 +54,7 @@ function Home () {
         async function fetchPopularGames () {
             console.log(user);
             try {
+                console.log("trying to fetch the games")
                 /* Fetch popular games from RAWG */
                 const popularGames = await axios.get(API_URL_RAWG, {
                     params: {
@@ -63,7 +64,7 @@ function Home () {
                     },
                 });
 
-                if (!popularGames.ok) {
+                if (popularGames.status !== 200) {
                     throw new Error(`API error: ${popularGames.status}`)
                 }
 
@@ -94,8 +95,8 @@ function Home () {
                 });
 
                 /* Throw error when RAWG api isn't working. */
-                if (!fetchRecentGames.ok) {
-                    throw new Error(`API error: ${fetchRecentGames.status}`)
+                if (recentGames.status !== 200) {
+                    throw new Error(`API error: ${recentGames.status}`)
                 }
 
                 setGamesRecent (recentGames.data.results)
