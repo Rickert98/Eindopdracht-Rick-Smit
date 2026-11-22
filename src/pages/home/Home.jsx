@@ -6,6 +6,7 @@ import mockGames from '../../constants/mockGames.json'
 
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
+import AddButton from '../../components/addButton/AddButton.jsx';
 
 import './Home.css';
 
@@ -98,9 +99,9 @@ function Home () {
                         },
                         signal: controller.signal,
                     });
-                    setUserLibrary(library);
+                    setUserLibrary(library.data);
                     console.log(`De userlibrary bestaat uit: `);
-                    console.log(library)
+                    console.log(library.data)
                 } catch(e) {
                     console.error(e);
                 }
@@ -160,6 +161,7 @@ function Home () {
                     <>
                         <PopularGames
                             key={gamesPopular[popularCount].id}
+                            id={gamesPopular[popularCount].id}
                             background_image={gamesPopular[popularCount].background_image}
                             name={gamesPopular[popularCount].name}
                             genre={gamesPopular[popularCount].genres[0].name}
@@ -168,7 +170,13 @@ function Home () {
                             playing={gamesPopular[popularCount].added_by_status.playing}
                             screenshot_one={gamesPopular[popularCount].short_screenshots[1].image}
                             screenshot_two={gamesPopular[popularCount].short_screenshots[2].image}
-                        />
+                        >
+                            <AddButton
+                                label={false}
+                                gameDetails={gamesPopular[popularCount]}
+                                library={userLibrary}
+                            />
+                        </PopularGames>
 
                         {/* Slider for the popular games */}
                         <span className="popular-slider">
@@ -203,7 +211,14 @@ function Home () {
                                         genres={game.genres[0].name}
                                         released={game.released}
                                         id={game.id}
-                                    />
+                                    >
+                                        <AddButton
+                                            label={false}
+                                            gameDetails={game}
+                                            library={userLibrary}
+                                        />
+                                    </GameTile>
+
                                 )
                             })}
                         </ul>
