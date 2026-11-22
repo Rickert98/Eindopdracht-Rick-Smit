@@ -77,6 +77,7 @@ function Profile () {
         if (updateProfilePicture[0].size < 2097152) {
             console.log("file is kleiner dan 2.097.152 bytes")
             UpdateProfilePicture ();
+            toggleEditProfilePicture(false);
         }
     }
 
@@ -104,15 +105,15 @@ function Profile () {
                                                 id="update-profile-picture"
                                                 onChange={((e)=> setUpdateProfilePicture(e.target.files))}
                                             />
-                                            <button type="submit">Submit</button>
+                                            <button type="submit" className='profile-button'>Submit</button>
                                         </form>
                                     </section>
                                     : ''
                                 }
                                 {editProfilePicture === true ?
-                                    <button onClick={(()=>toggleEditProfilePicture(false))} >Cancel</button>
+                                    <button className='profile-button-cancel' onClick={(()=>toggleEditProfilePicture(false))} >Cancel</button>
                                     :
-                                    <button onClick={(()=>toggleEditProfilePicture(true))} >Edit profile picture</button>
+                                    <button className='profile-button' onClick={(()=>toggleEditProfilePicture(true))} >Edit profile picture</button>
                                 }
                             </div>
                             <p>Username: {profile.username}</p>

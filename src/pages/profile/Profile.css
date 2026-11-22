@@ -35,3 +35,17 @@
     align-items: center;
 }
 
+.profile-button {
+    border-radius: 5px;
+    background-color: var(--color-quaternary);
+    padding: 5px;
+    border: none;
+}
+
+.profile-button-cancel {
+    border-radius: 5px;
+    background-color: var(--color-tertiary);
+    padding: 5px;
+    border: none;
+}
+
