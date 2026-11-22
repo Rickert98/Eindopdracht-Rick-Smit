@@ -10,10 +10,6 @@ import SpecLister from '../../helpers/SpecLister.js';
 import UserReviewScore from '../../helpers/UserReviewScore.js';
 import AddButton from '../../components/addButton/AddButton.jsx';
 
-import fetchUserLibrary from '../../helpers/fetchUserLibrary.js';
-import deleteGameFromUserLibrary from '../../helpers/deleteUserLibrary.js';
-import postUserLibrary from '../../helpers/postUserLibrary.js';
-
 import styles from './Game_detail.module.css';
 import {AuthContext} from "../../context/AuthContext.jsx";
 
@@ -21,20 +17,12 @@ function GameDetail () {
     const [gameDetails, setGameDetails] = useState();
     const [gameScreenshots, setGameScreenshots] = useState([]);
     const [userLibrary, setUserLibrary] = useState([]);
-    /* State for posting a game to the users library in NOVI api */
-    const [addGameLibrary, setAddGameLibrary] = useState({
-        gameId: 0,
-        title: '',
-        genres: '',
-        background: '',
-        platforms: ''
-    });
+
     /* State for posting a game to the users library in NOV api */
-    const [deleteGameLibrary, setDeleteGameLibrary] = useState(0);
     const [loading, toggleLoading] = useState(false);
     const [error, toggleError] = useState(false);
     const {id} = useParams();
-    const token = localStorage.getItem('token');
+
     const { user } = useContext(AuthContext);
 
     /* Fetch game data upon refresh */
@@ -52,8 +40,6 @@ function GameDetail () {
                     },
                     signal: controller.signal,
                 });
-                /* Also fetch userLibrary so we know if the game is allready owned by the user */
-                await fetchUserLibrary(user.id, setUserLibrary);
 
                 /* Throw error when RAWG api isn't working. */
                 if(result.status !== 200) {
@@ -114,46 +100,36 @@ function GameDetail () {
             }
         }
 
+        async function fetchUserLibrary () {
+            if (user !== null) {
+                try {
+                    const library = await axios.get(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`, {
+                        params: {
+                            userId: user.id
+                        },
+                        headers: {
+                            'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                            'Content-Type': 'application/json',
+                            'accept': '*/*',
+                        }
+                    });
+                    setUserLibrary(library.data);
+                    console.log(`De userlibrary bestaat uit: `);
+                    console.log(library.data)
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+        }
+
         fetchGame(id);
         fetchScreenshots(id);
+        fetchUserLibrary ();
 
         return function cleanup() {
-            console.log("screenshots")
-            console.log(gameScreenshots);
             controller.abort();
         }
     }, [])
-
-    /* When user clicks on the button 'add to library'. This function will post the new game to the library */
-    useEffect (() => {
-        console.log("going to add game")
-        async function addGameToLibrary() {
-            await postUserLibrary(user.id, addGameLibrary, token, setAddGameLibrary)
-        }
-        /* Add a check so it doesnt post anything the first time the page renders */
-        if (addGameLibrary.gameId !== 0) {
-            addGameToLibrary()
-        } else {
-            console.log("No game added");
-        }
-    },[addGameLibrary])
-
-    /* When user clicks on the button 'delete from library'. This function will delete the  game from the library */
-    useEffect (() => {
-        async function deleteUserLibrary() {
-            try {
-                await deleteGameFromUserLibrary(user.id, deleteGameLibrary, token, setDeleteGameLibrary)
-            } catch(e) {
-                console.error(e);
-            }
-        }
-        /* Add a check so it doesnt try to delete anything when there is no  game set in the state */
-        if (deleteGameLibrary !== 0) {
-            deleteUserLibrary()
-        } else {
-            console.log("No game deleted");
-        }
-    },[deleteGameLibrary])
 
     return (
         <>
@@ -173,9 +149,6 @@ function GameDetail () {
                                 label={true}
                                 gameDetails={gameDetails}
                                 library={userLibrary}
-                                addGame={setAddGameLibrary}
-                                addGameLibrary={addGameLibrary}
-                                deleteGame={setDeleteGameLibrary}
                             />
                             {
                                 gameDetails.publishers &&
