@@ -9,7 +9,7 @@
     color: var(--color-tertiary);
 }
 
-.recently-released-wrapper {
+.List-games-wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

@@ -21,6 +21,9 @@ function Home () {
     const [gamesPopular, setGamesPopular] = useState([]);
     const [popularCount, setPopularCount] = useState(0);
     const [gamesRecent, setGamesRecent] = useState([]);
+    const [gamesRated, setGamesRated] = useState([]);
+
+
     const [userLibrary, setUserLibrary] = useState([]);
     const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
 
@@ -113,17 +116,26 @@ function Home () {
 
         /* ==========          ==================================================================          ========== */
         /* Call the fetch games function here. First parameter is used for SearchQuerries, second parameter for State */
+        /* Fetch popular games */
         FetchGames ( {
             page_size: 6,
             ordering: '-added',
         }, setGamesPopular);
 
+        /* Fetch recent games */
         FetchGames ( {
             page_size: 20,
             ordering: '-released',
-            metacritic: '40, 100',
+            metacritic: '60, 100',
         }, setGamesRecent);
 
+        /* Fetch */
+        FetchGames ( {
+            page_size: 20,
+            ordering: '-ratings',
+        }, setGamesRated);
+
+        console.log(gamesRated);
 
         /* Finally fetch user library and set loading to false */
         fetchUserLibrary();
@@ -201,7 +213,7 @@ function Home () {
                 {gamesRecent.length > 0 && (
                     <section className="recently-released">
                         <h2 className='section-header'>Recently released</h2>
-                        <ul className="recently-released-wrapper">
+                        <ul className="List-games-wrapper">
                             {gamesRecent.map((game) => {
                                 return(
                                     <GameTile
@@ -224,6 +236,33 @@ function Home () {
                         </ul>
                     </section>
                 )}
+                {gamesRated.length > 0 && (
+                    <section className="recently-released">
+                        <h2 className='section-header'>Top rated</h2>
+                        <ul className="List-games-wrapper">
+                            {gamesRated.map((game) => {
+                                return(
+                                    <GameTile
+                                        key={game.id}
+                                        background_image={game.background_image}
+                                        name={game.name}
+                                        genres={game.genres[0].name}
+                                        released={game.released}
+                                        id={game.id}
+                                    >
+                                        <AddButton
+                                            label={false}
+                                            gameDetails={game}
+                                            library={userLibrary}
+                                        />
+                                    </GameTile>
+
+                                )
+                            })}
+                        </ul>
+                    </section>
+                )}
+
                 {loading === true && <p>Loading...</p> }
             </div>
         </>
