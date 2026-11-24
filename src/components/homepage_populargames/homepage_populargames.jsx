@@ -15,7 +15,7 @@ function PopularGames (props) {
                 <div className={styles['gamedetail-screenshot-wrapper']}>
                     {/* Use the game's title as a button to direct the user to the game detail page */}
                     <button onClick={(() => {navigate(`/game/${props.id}`)})} className={styles['game-title']}>
-                        <h3>{name}</h3>
+                        <h3>{props.name}</h3>
                     </button>
                     <p>{props.genre}</p>
                     <p>Owned by {props.owned} players</p>

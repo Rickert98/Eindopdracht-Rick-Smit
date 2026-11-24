@@ -200,7 +200,7 @@ function Home () {
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
                     <section className="recently-released">
-                        <h2>Recently released</h2>
+                        <h2 className='section-header'>Recently released</h2>
                         <ul className="recently-released-wrapper">
                             {gamesRecent.map((game) => {
                                 return(
