@@ -1,0 +1,51 @@
+.profile-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-header {
+    align-items: center;
+    text-align: center;
+}
+
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-picture-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-picture {
+    max-width: 300px;
+    max-height: 600px;
+    border-radius: 15%;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-button {
+    border-radius: 5px;
+    background-color: var(--color-quaternary);
+    padding: 5px;
+    border: none;
+}
+
+.profile-button-cancel {
+    border-radius: 5px;
+    background-color: var(--color-tertiary);
+    padding: 5px;
+    border: none;
+}
+

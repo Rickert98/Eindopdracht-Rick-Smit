@@ -1,20 +1,19 @@
 import styles from './homepage_gametile.module.css';
-
-
 import {useNavigate} from 'react-router-dom';
 
-function GameTile ({background_image, name, genres, released, id}) {
+function GameTile (props) {
     const navigate = useNavigate();
     return (
         <li className={styles['tile-wrapper']}>
                 {/* Add a Onclick event to direct player to the game detail page */}
-                <button className={styles['tile-button']} onClick={(() => {navigate(`/game/${id}`)})}>
-                    <img src={background_image} alt='game image'/>
-                    <h3 className={styles['tile-header']}>{name}</h3>
+                <button className={styles['tile-button']} onClick={(() => {navigate(`/game/${props.id}`)})}>
+                    <img src={props.background_image} alt='game image'/>
+                    <h3 className={styles['tile-header']}>{props.name}</h3>
                 </button>
                 <div className={styles['tile-details']}>
-                    <p>{genres}</p>
-                    <p>{released}</p>
+                    <p>{props.genres}</p>
+                    <p>{props.released}</p>
+                    {props.children}
                 </div>
         </li>
     )

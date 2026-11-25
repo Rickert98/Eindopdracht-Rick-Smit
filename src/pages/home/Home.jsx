@@ -6,142 +6,128 @@ import mockGames from '../../constants/mockGames.json'
 
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
+import AddButton from '../../components/addButton/AddButton.jsx';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage.jsx';
 
 import './Home.css';
 
 function Home () {
-
-    /* get the user ID and email from the context */
+    const token = localStorage.getItem('token');
+    const API_URL_NOVI = `https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`;
+    const API_URL_RAWG = 'https://api.rawg.io/api/games';
+    const API_KEY_RAWG = import.meta.env.VITE_API_KEY;
     const { user } = useContext(AuthContext);
 
     /* Set States for storing game data */
     const [gamesPopular, setGamesPopular] = useState([]);
     const [popularCount, setPopularCount] = useState(0);
     const [gamesRecent, setGamesRecent] = useState([]);
+    const [gamesRated, setGamesRated] = useState([]);
+
     const [userLibrary, setUserLibrary] = useState([]);
-    const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
+
     const [loading, toggleLoading] = useState(false);
+    const [error, toggleError] = useState(false);
 
-    /* ============================================================================= Set States for possible errors */
-
-    const token = localStorage.getItem('token');
-    const API_URL_RAWG = 'https://api.rawg.io/api/games';
-
-    async function putUserLibrary(gameId) {
-        console.log(token)
-        const { user } = useContext(AuthContext);
-        try {
-            const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
-                "userId": user.id,
-                "gameId": gameId,
-            }, {
-                headers: {
-                    'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                    'accept': '*/*',
-                }
-            });
-            console.log("library succesvol gepost")
-            console.log(response);
-        } catch(e) {
-            console.error(e);
-        }
-    }
-
+    /* =================================================================================================================
+                        Upon refresh:
+                                    Fetch games from RAWG
+                                    Fetch userlibrary
+    */
     useEffect (() => {
         toggleLoading(true);
-        /* Upon refresh fetch games from RAWG api and fetch userLibrary */
-        async function fetchPopularGames () {
-            console.log(user);
+        toggleError(false);
+        const controller = new AbortController();
+
+        /* Fetch games from RAWG API. SearchQuery can be updated */
+        async function FetchGames (searchQuery, setState) {
             try {
-                /* Fetch popular games from RAWG */
-                const popularGames = await axios.get(API_URL_RAWG, {
+                const response = await axios.get(API_URL_RAWG, {
                     params: {
-                        key: import.meta.env.VITE_API_KEY,
-                        page_size: 6,
-                        ordering: '-added',
+                        key: API_KEY_RAWG,
+                        ...searchQuery
                     },
+                    signal: controller.signal,
                 });
 
-                if (!popularGames.ok) {
-                    throw new Error(`API error: ${popularGames.status}`)
+                /* If RAWG doesnt respond, switch to mockdata */
+                if (response.status !== 200) {
+                    throw new Error(`API error: ${response.status}`);
                 }
-
-                setGamesPopular (popularGames.data.results)
-                console.log(popularGames);
-
-
+                /* If no problem. Set state with the results */
+                setState(response.data.results);
+                console.log("Succesfully received data from RAWG");
             } catch (e){
-                console.warn(
-                    "RAWG API not available, switching to mockdata"
-                )
+                console.warn("RAWG api is not available, switching to mockdata");
                 console.error(e);
-                setGamesPopular(mockGames.results);
+                setState(mockGames.results);
+
+            }
+            return function cleanup() {
+                controller.abort();
             }
         }
 
-        async function fetchRecentGames () {
-            console.log(user);
-            try {
-                /* Fetch recent games from RAWG */
-                const recentGames = await axios.get(API_URL_RAWG, {
-                    params: {
-                        key: import.meta.env.VITE_API_KEY,
-                        page_size: 20,
-                        ordering: '-released',
-                        metacritic: '40, 100',
-                    },
-                });
-
-                /* Throw error when RAWG api isn't working. */
-                if (!fetchRecentGames.ok) {
-                    throw new Error(`API error: ${fetchRecentGames.status}`)
+        /* Fetch userlibrary to check if some games are allready owned by user. */
+        async function fetchUserLibrary() {
+            if (user !== null) {
+                try {
+                    const library = await axios.get(API_URL_NOVI, {
+                        params: {
+                            userId: user.id
+                        },
+                        headers: {
+                            'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
+                            'Content-Type': 'application/json',
+                            'accept': '*/*',
+                        },
+                        signal: controller.signal,
+                    });
+                    setUserLibrary(library.data);
+                    console.log(`De userlibrary bestaat uit: `);
+                    console.log(library.data)
+                } catch(e) {
+                    console.error(e);
+                    toggleError(true);
                 }
-
-                setGamesRecent (recentGames.data.results)
-                console.log(recentGames);
-
-                console.log("loading set to false")
-                toggleLoading(false);
-            } catch (e){
-                console.warn(
-                    "RAWG API not available, switching to mockdata"
-                )
-                console.error(e);
-                setGamesRecent(mockGames.results);
+                return function cleanup() {
+                    controller.abort();
+                }
             }
         }
-        fetchPopularGames();
-        fetchRecentGames();
+
+        /* ==========          ==================================================================          ========== */
+        /* Call the fetch games function here. First parameter is used for SearchQuerries, second parameter for State */
+        /* Fetch popular games */
+        FetchGames ( {
+            page_size: 6,
+            ordering: '-added',
+        }, setGamesPopular);
+
+        /* Fetch recent games */
+        FetchGames ( {
+            page_size: 20,
+            ordering: '-released',
+            metacritic: '60, 100',
+        }, setGamesRecent);
+
+        /* Fetch */
+        FetchGames ( {
+            page_size: 20,
+            ordering: '-rated',
+        }, setGamesRated);
+
+        console.log(gamesRated);
+
+        /* Finally fetch user library and set loading to false */
         fetchUserLibrary();
-
-
+        toggleLoading(false);
     }, []);
 
 
-    async function fetchUserLibrary() {
-        if (user !== null) {
-            try {
-                const library = await axios.get(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary`, {
-                    params: {
-                        userId: user.id
-                    },
-                    headers: {
-                        'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
-                        'Content-Type': 'application/json',
-                        'accept': '*/*',
-                    }
-                });
-                setUserLibrary(library);
-                console.log(`De userlibrary bestaat uit: `);
-                console.log(library)
-            } catch(e) {
-                console.error(e);
-            }
-        }
-    }
-
+    /* =================================================================================================================
+                        Handles the count for the slider under popular games
+    */
     function handleCount (number) {
         /* State popularCount cant be higher than the number of popular games in stored in the state gamesPopular.
         * Cant be lower than 0 */
@@ -159,6 +145,7 @@ function Home () {
         let radiobtn = document.getElementById(`btn-radio${number}`);
         radiobtn.checked = true;
     }
+    /* ============================================================================================================== */
 
     return (
         <>
@@ -168,6 +155,7 @@ function Home () {
                     <>
                         <PopularGames
                             key={gamesPopular[popularCount].id}
+                            id={gamesPopular[popularCount].id}
                             background_image={gamesPopular[popularCount].background_image}
                             name={gamesPopular[popularCount].name}
                             genre={gamesPopular[popularCount].genres[0].name}
@@ -176,7 +164,13 @@ function Home () {
                             playing={gamesPopular[popularCount].added_by_status.playing}
                             screenshot_one={gamesPopular[popularCount].short_screenshots[1].image}
                             screenshot_two={gamesPopular[popularCount].short_screenshots[2].image}
-                        />
+                        >
+                            <AddButton
+                                label={false}
+                                gameDetails={gamesPopular[popularCount]}
+                                library={userLibrary}
+                            />
+                        </PopularGames>
 
                         {/* Slider for the popular games */}
                         <span className="popular-slider">
@@ -200,8 +194,8 @@ function Home () {
                 {/* Insert section Recently released */}
                 {gamesRecent.length > 0 && (
                     <section className="recently-released">
-                        <h2>Recently released</h2>
-                        <ul className="recently-released-wrapper">
+                        <h2 className='section-header'>Recently released</h2>
+                        <ul className="List-games-wrapper">
                             {gamesRecent.map((game) => {
                                 return(
                                     <GameTile
@@ -211,13 +205,48 @@ function Home () {
                                         genres={game.genres[0].name}
                                         released={game.released}
                                         id={game.id}
-                                    />
+                                    >
+                                        <AddButton
+                                            label={false}
+                                            gameDetails={game}
+                                            library={userLibrary}
+                                        />
+                                    </GameTile>
+
                                 )
                             })}
                         </ul>
                     </section>
                 )}
+                {gamesRated.length > 0 && (
+                    <section className="recently-released">
+                        <h2 className='section-header'>Top rated</h2>
+                        <ul className="List-games-wrapper">
+                            {gamesRated.map((game) => {
+                                return(
+                                    <GameTile
+                                        key={game.id}
+                                        background_image={game.background_image}
+                                        name={game.name}
+                                        genres={game.genres[0].name}
+                                        released={game.released}
+                                        id={game.id}
+                                    >
+                                        <AddButton
+                                            label={false}
+                                            gameDetails={game}
+                                            library={userLibrary}
+                                        />
+                                    </GameTile>
+
+                                )
+                            })}
+                        </ul>
+                    </section>
+                )}
+
                 {loading === true && <p>Loading...</p> }
+                {error === true && <ErrorMessage message="Something went wrong with fetching the data. Try again later."/>}
             </div>
         </>
     )

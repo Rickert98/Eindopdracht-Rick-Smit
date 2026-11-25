@@ -57,7 +57,6 @@ function AuthContextProvider ({children}) {
                         'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
-                        'accept': '*/*',
                     }
                 });
 

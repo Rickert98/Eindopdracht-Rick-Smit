@@ -6,6 +6,7 @@
     justify-content: center;
 
     background-color: var(--color-primary);
+    padding-top: 50px;
 }
 
 .inner-content-container {
@@ -14,5 +15,4 @@
     flex-shrink: 1;
 
     margin: 30px;
-
 }
