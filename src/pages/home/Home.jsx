@@ -7,6 +7,7 @@ import mockGames from '../../constants/mockGames.json'
 import GameTile from '../../components/homepage_gametile/homepage_gametile.jsx';
 import PopularGames from '../../components/homepage_populargames/homepage_populargames.jsx'
 import AddButton from '../../components/addButton/AddButton.jsx';
+import ErrorMessage from '../../components/errorMessage/ErrorMessage.jsx';
 
 import './Home.css';
 
@@ -245,6 +246,7 @@ function Home () {
                 )}
 
                 {loading === true && <p>Loading...</p> }
+                {error === true && <ErrorMessage message="Something went wrong with fetching the data. Try again later."/>}
             </div>
         </>
     )
