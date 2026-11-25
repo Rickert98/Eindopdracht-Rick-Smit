@@ -13,7 +13,7 @@ function AddButton ({label, gameDetails, library}) {
     /* State that toggles when the game is allready owned. When owned use a different image src */
     const [isOwned, toggleIsOwned] = useState(Boolean());
     const [labeltext, setLabeltext] = useState('Add this game to your library');
-    const { user } = useContext(AuthContext);
+    const {isAuth, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
     const [userLibrary, setUserLibrary] = useState(library);
 
@@ -128,10 +128,12 @@ function AddButton ({label, gameDetails, library}) {
     return (
         <label className={styles['Addbutton-label']}>
             {label === true ? `${labeltext}` : ""}
-            <input type="checkbox" id={id} className={styles['Addbutton-input']} onClick={(() => {handleChange(id)})}/>
+
+            <input type="checkbox" id={id} className={styles['Addbutton-input']} onClick={(() => {isAuth ? handleChange(id) : console.log("log in")})}/>
             <img
                 src={isOwned === true ? addedLibraryButton : addLibraryButton}
                 alt="add to library button"
+                title={isAuth ? "Add this game to your library" : "Log in to add this game to your library"}
             />
         </label>
     )

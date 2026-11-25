@@ -23,32 +23,10 @@ function Home () {
     const [gamesRecent, setGamesRecent] = useState([]);
     const [gamesRated, setGamesRated] = useState([]);
 
-
     const [userLibrary, setUserLibrary] = useState([]);
-    const [addGameLibrary, setAddGameLibrary] = useState(0); /* State for posting a game to the users library in NOV api */
 
     const [loading, toggleLoading] = useState(false);
-
-    async function putUserLibrary(gameId) {
-        console.log(token)
-        try {
-            const response = await axios.post(`https://novi-backend-api-wgsgz.ondigitalocean.app/api/userLibrary/`,{
-                "userId": user.id,
-                "gameId": gameId,
-            }, {
-                headers: {
-                    'novi-education-project-id': import.meta.env.VITE_NOVI_API_KEY,
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                    'accept': '*/*',
-                }
-            });
-            console.log("library succesvol gepost")
-            console.log(response);
-        } catch(e) {
-            console.error(e);
-        }
-    }
+    const [error, toggleError] = useState(false);
 
     /* =================================================================================================================
                         Upon refresh:
@@ -57,6 +35,7 @@ function Home () {
     */
     useEffect (() => {
         toggleLoading(true);
+        toggleError(false);
         const controller = new AbortController();
 
         /* Fetch games from RAWG API. SearchQuery can be updated */
@@ -81,6 +60,7 @@ function Home () {
                 console.warn("RAWG api is not available, switching to mockdata");
                 console.error(e);
                 setState(mockGames.results);
+
             }
             return function cleanup() {
                 controller.abort();
@@ -107,6 +87,7 @@ function Home () {
                     console.log(library.data)
                 } catch(e) {
                     console.error(e);
+                    toggleError(true);
                 }
                 return function cleanup() {
                     controller.abort();
@@ -132,7 +113,7 @@ function Home () {
         /* Fetch */
         FetchGames ( {
             page_size: 20,
-            ordering: '-ratings',
+            ordering: '-rated',
         }, setGamesRated);
 
         console.log(gamesRated);
